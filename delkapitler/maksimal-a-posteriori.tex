@@ -1,0 +1,16 @@
+\subsection{Maksimal a posteriori}
+Vi begynner med Bayes' lov
+\begin{equation}
+P(A | B)=\frac{P(A B)}{P(B)} = \frac{P(B | A) P(A)}{P(B)}
+\end{equation}
+som kan bevises ved Venn-diagram eller lignende.
+
+Ved å bytte ut $A$ og $B$ med $\theta$ og $y$, får vi en måte å oppdatere vår tro om en variabel sin fordeling på, basert på data. Vi er imidlertid avhengige av å ha en initiell formening om fordelingen til $\theta$, dette kalles en \textbf{prior}. I praksis vil denne gjerne gjøre få antagelser, men utelukke fullstendig urealistiske muligheter (f.eks. utelukke negativ høyde på personer, om man vil estimere dette). Med en modell $P(y | \theta)$, en prior $P(\theta)$, og data som gir oss $P(y)$, får vi da
+\begin{equation}
+P(\theta | y)=\frac{P(y | \theta) P(\theta)}{P(y)}
+\end{equation}
+Basert på denne nye, evidensbaserte fordelingen, kan vi definere estimatoren
+\begin{equation}
+\widehat{\theta}_{\mathrm{MAP}}:=\arg \max _{\theta \in \Theta} P(\theta | y)=\arg \max _{\theta \in \Theta} \frac{P(y | \theta) P(\theta)}{P(y)}=\arg \max _{\theta \in \Theta} P(y | \theta) P(\theta)
+\end{equation}
+som vil være moden til den posteriore fordeling. Merk at denne ikke trenger å være representativ for fordelingen, f.eks. hvis fordelingen har en smal, høy topp langt unna "tyngdepunktet".

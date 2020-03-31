@@ -1,0 +1,18 @@
+\subsection{Noen småting}
+\subsubsection{Notasjon}
+Gjennom denne oppsummeringen brukes følgende notasjon
+\begin{itemize}
+\item Skalare variabler og funksjoner skrives med små bokstaver -- $\alpha, x, g(\cdot)$
+\item Vektorvariabler og -funksjoner skrives med små, fete bokstaver -- $\mathbf{\alpha}, \mathbf{x}, \mathbf{g(\cdot)}$
+\item Matriser skrives med store bokstaver -- $A, X$
+\item Transponert, invers, pseudoinvers -- $\cdot^T, \cdot^{-1}, \cdot^\dagger$
+\item Definisjonsmengder skrives med kaligrafiske bokstaver, eller stor theta -- $\mathcal{X}, \mathcal{Y}, \mathcal{D}$ eller $\Theta$
+\end{itemize}
+
+\subsubsection{Definisjoner}
+En funksjon \(\phi(\boldsymbol{y}): \mathcal{Y}^{N} \mapsto \mathbb{R}^{M}\) er en \textbf{observator} dersom den er målbar, og den er uavhengig av $\theta$. En observator \(\phi(\boldsymbol{y}): \boldsymbol{y}^{N} \mapsto \Theta\) er en \textbf{estimator} dersom den er målbar og uavhengig av $\theta$ (dvs. den er en observator med verdimengde lik $\Theta$.
+
+\subsubsection{Antagelser}
+Når vi snakker om regresjon, antar vi at dataen $y_t$ genereres av funksjonen \(y_{t}=f\left(u_{t} ; \theta\right)+v_{t}\), og at dette resulterer i et datasett \(\mathcal{D}=\left\{\left(u_{t}, y_{t}\right)\right\}_{t=1, \ldots, N}\). Ved hjelp av parametre \(\theta \in \Theta\), hypoteserommet vårt, vil vi finne en estimator \(\widehat{\theta} \in \Theta\) som best mulig forklarer datasettet vårt.
+
+Hva betyr det å "best mulig forklare $\mathcal{D}$? Det finnes det ulike tolkninger av.
