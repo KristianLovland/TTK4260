@@ -3,3 +3,6 @@
 *.synctex.gz
 *.toc
 .DS_STORE
+*.dvi
+*.fls
+*.fdb_latexmk

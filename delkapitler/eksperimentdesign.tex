@@ -1,0 +1,73 @@
+\section{Multivariat Dataanalyse}
+Her begynner de nye metodene. Jeg ser frem til å lære ny teori, og på å anvende denne \Cooley.
+ 
+\subsection{Eksperimentdesign}
+\textbf{Eksperimentdesign} er forhåndsplanlagt, systematisk variasjon av kontrollerte faktorer i et eksperiment, med det formål å få mest mulig informasjon med minst mulig innsats. Dette er et alternativ til den naive måten å gjøre det på, dvs. å endre én variabel om gangen. Denne måten å gjøre det på har flere fordeler. I tillegg til den åpenbare fordelen med et lavt, forutsigbart antall eksperimenter som må gjennomføres, får man mer informasjon om interaksjon mellom variabler. Det finnes flere ulike typer eksperimentdesign. Her går vi gjennom noen av dem.
+
+\subsubsection{Factorial designs}
+Dette er den enkleste metoden som gås gjennom. Den er optimal for å detektere hovedeffekter, og deres interaksjoner. Den er også basisen for mange andre ttyper eksperimentdesign. Her velger man seg to verdier for hver input-variabel, og gjennomfører et eksperiment for hver av de mulige kombinasjonene av disse. Altså trenger man $2^n$ eksperimenter når man har $n$ variable. La $y_+$ og $y_-$ være observasjonene av en variabel $y$ i de to ulike tilstandene, og $n$ være antall observasjoner for hver av disse. Effekten av endringene i $y$ er da gitt av
+
+\begin{equation}
+	\Delta y = \frac{\sum y_+} {n_+} - \frac{\sum y_-}{n_-}
+\end{equation}
+
+Før man begynner å gjennomføre et eksperiment, er det viktig å regne ut 
+den statistiske styrken til eksperimentet. Denne er avhengig av
+
+\begin{enumerate}
+	\item $\delta$: Hva som regnes som en signifikant endring 
+	\item $\sigma$: Støy i målt responsvariabel
+	\item Antall eksperimenter
+	\item $\alpha$: Signifikansnivå
+\end{enumerate}
+
+Basert på disse parameterne kan man regne ut
+
+\begin{equation}
+	\textrm{Statistisk styrke} = (1 - \beta) \cdot 100 \%
+\end{equation}
+
+Denne kan tolkes som sannsynligheten for å ``avsløre'' en effekt av størrelsedelta, gitt støyet som nevnt over. Dette er en signal til støy-ratio, gitt av$\frac{\Delta}{\sigma}$. Denne burde være høy, minst 80\%. I tillegg til å gjennomføre eksperimentene som nevnt over, kan det være nyttig å gjennomføre noen ekstra eksperimenter der tilstandene befinner seg rundt middelverdi, for å kunne estimere feilvarians. Repliserte eksperimenter er heller aldri noen ulempe å gjennomføre.
+
+\subsubsection{Multippel lineær regresjon (MLR)}
+En mer fornuftig (synes jeg) måte å analysere multivariabel data på er å sette opp en enkel lineær modell
+
+\begin{equation}
+	y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k + f
+\end{equation}
+
+Den beste tilpasningen av en slik modell får man ved å minimere summen av kvadratavviket mellom modellprediksjon og faktisk data, som forklart i avsnitt \ref{sec:minste_kvadrater}. Når dette er gjennomført analyserers resultatene ved hjelp av en ANOVA-tabell (analysis of variance). I denne deles data inn i bidrag fra hhv. struktur og støy, slik at kvadratsummen
+
+\begin{equation}
+	SS_{total} = SS_{model} + SS_{error}
+\end{equation}
+
+Gitt $k$ forklaringsvariable og $l$ forsøk, vil ANOVA-tabellen for hele modellen se ut som i tabell \ref{tab:anova} (her betyr MS mean square). F-verdien er et mål på statistisk signifikans, og deler navn med fordelingen den er basert på. Denne observatoren oppfyller $E[F] = 1 + n \frac{\sigma_{model}^2}{\sigma_{error}^2}$, og en F-verdi langt over 1 gir dermed grunnlag for å forkaste nullhypotesen om at modellen vår ikke forklarer resultatene. 
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c|c|c|c||c|c}
+		\textbf{Kilde} & \textbf{SS} & \textbf{df} & \textbf{MS} & \textbf{F-ratio} & \textbf{p-verdi} \\ \hline 
+		Modell & $SS_{modell}$ & $k$ & $MSR = SS_{modell}/(k)$ & MSR/MSE & p \\
+		Feil & $SS_{feil}$ & $l-k-1$ & $MSE = SS_{feil}/(l-k-1)$ & & \\
+		Total & $SS_{total}$ & $l-1$ & $MST = SS_{total}/(l-1)$ & & 
+	\end{tabular}
+	\caption{ANOVA-tabellstruktur}
+	\label{tab:anova}
+\end{table}
+
+Man kan også sette opp en ANOVA-tabell for enkeltledd i modellen, hver av disse vil ha samme struktur som øverste rad i tabelll \ref{fig:anova}.
+
+\subsubsection{Fractional Factorial Designs}
+Jeg vet ikke hva dette heter på norsk.
+
+Full Factorial designs er kostbare hvis det er mange variabler. I Fractional Factorial designs gjennomfører man kun en delmengde av disse, og forsøker å dekke så ``mye'' som mulig av designrommet. Prisen man betaler er at estimatene av alle variablene ikke lenger kan være uavhengige.
+
+For eksempel, gitt tre designvariabler $A$, $B$, $C$. Ved å velge å kun gjennomføre eksperimenter i planet $C = AB$, kan man halvere antall eksperimenter som gjennomføres.
+
+\subsubsection{Optimeringsbaserte design}
+Om man vet mer om hva slags respons man forventer i modellen sin, kan man utnytte denne informasjonen til eksperimentdesign. Det finnes mange metoder som baserer seg på ulike optimalitetskriterier. I pensum trekkes \textbf{Central Composite Design} og \textbf{Bob-Behnken Designs}, frem som viktige metoder. Begge er eksempler på bruk av \textbf{Response Surface Methodology}. Om man kjenner til begrensninger i tilstandsrommet kan man bruke dette til å utelukke umulige tilstander fra eksperiemntdesignet.
+
+Uansett hvordan man velger å gjennomføre eksperimentene, bør man plotte fornuftige plott når man er ferdig. Dette gjelder stort sett alltid, har jeg inntrykk av.
+
+
