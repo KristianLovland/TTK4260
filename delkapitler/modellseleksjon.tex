@@ -70,5 +70,18 @@ Under andre antakelser kan man finne andre kriterier. Et annet mye brukt kriteri
 \end{equation}
 
 \subsubsection{Jackknifing og bootstrapping}
+Når man har en estimator, kan det være nyttig å estimere hvor god den er. Fest setebeltet, for dette kommer til å bli \textsc{meta}.
 
+\textbf{Jackknifing} er en enkel metode for å estimere bias og varians til en estimator, som typisk bruke spå små datasett. Man begynner med å dele opp datasettene i delmengdene $X_{[i]} = \{X_1, \dots, X_{i-1}, X_{i+1}, \dots, X_n\}$. For hver av disse defineres estimatoren $\hat{\theta}_{[i]} = \hat{\theta}(X_{[i]})$. La gjennomsnittet av alle disse være $\hat{\theta}_{\textrm{ave}}$. Da er
+
+\begin{equation}
+	\widehat{\operatorname{bias}}(\widehat{\theta})_{\mathrm{jk}}:=\frac{n-1}{n} \sum_{i=1}^{n}\left(\widehat{\theta}_{[i]}-\widehat{\theta}\right) \quad \operatorname{var}(\widehat{\theta})_{\mathrm{jk}}:=\frac{n-1}{n} \sum_{i=1}^{n}\left(\widehat{\theta}_{[i]}-\widehat{\theta}_{\mathrm{ave}}\right)^{2}
+	\label{eq:jackknifing}
+\end{equation}
+
+Metoden kan også generaliseres til å fjerne $k$ elementer i hvert reduserte datasett. Man kan se at jackknifing i praksis er en form for kryssvalidering.
+
+En mer sofisitkert metode er \textbf{bootstrapping}. Denne håndterer bl.a. skjeve fordelinger bedre. Metoden går ut på å generere $B$ nye datasett av samme dimensjon som den originale ved å plukke observasjoner \textit{med tilbakelegging}. F.eks. kan man fra datasettet $\{1, 2, 3, 4\}$ generere mengden $\{1, 4, 2, 2\}$. Deretter kan man regne ut bias og varians som i likning \ref{eq:jackknifing}.
+
+Hvis man kjenner fordelingen til en variabel $\theta$ kan man f.eks. bruke estimatene til å finne et tosidig $\alpha$-konfidensintervall $P[ | \hat{\theta} - \theta | \leq \alpha ]$. 
 
