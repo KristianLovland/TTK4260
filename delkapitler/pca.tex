@@ -19,7 +19,7 @@ PCA går kort oppsummert ut på å finne vektorer som best mulig forklarer varia
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figurer/pca_skvis}
+	\includegraphics[width=\textwidth]{figurer/pca_skvis}
 	\caption{Geometrisk tolkning av lineærtransformasjon}
 	\label{fig:pca_skvis}
 \end{figure}
@@ -42,11 +42,11 @@ Hvis egenvektorene til $A$ er lineært uavhengige, vil $\mathbf{V}$ være invert
 	A  =\mathbf{U} \mathbf{\Sigma} \mathbf{V}^*
 \end{equation}
 
-Ved å slå sammen matrisene $\mathbf{U} \mathbf{\Sigma}$ står vi igjen med en ny tolkning av $A$, forklart av kolonnene i $\mathbf{V}^*$ og kolonnene i $\mathbf{U} \mathbf{\Sigma}$. Dette er illustrert i figur \ref{fig:pca_komponentvis}.
+Ved å slå sammen matrisene $\mathbf{U} \mathbf{\Sigma}$ står vi igjen med en ny tolkning av $A$, forklart av kolonnene i $\mathbf{V}^*$ og kolonnene i $\mathbf{U} \mathbf{\Sigma}$. Dette er illustrert i figur \ref{fig:pca_komponentvis}. Mye av styrken til PCA ligger i at hvis $A$ har en lav nok underliggende dimensjon, kan vi approksimere $A$ ganske bra ved å kaste bort vektorene som svarer til lave singulærverdier $\sigma_i$. Modellordenen reduseres drastisk uten at vi mister viktig informasjon \Cooley.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figurer/pca_komponentvis}
+	\includegraphics[width=\textwidth]{figurer/pca_komponentvis}
 	\caption{Tolkning av SVD}
 	\label{fig:pca_komponentvis}
 \end{figure}
@@ -73,4 +73,7 @@ PCA kan også gjøres ved å finne SVD-en til $X$, dette finnes det funksjoner f
 \end{equation}
 
 En effektiv metode for utregning av PC-er kalles Nonlinear Iterative Partial Least Squares (\textbf{NIPALS}). Denne ble blant annet brukt i tidlige versjoner av Google sin PageRank-algoritme. Algoritmen går ut på å iterativt finne hver prinsipale komponent, og å fjerne variabiliteten denne bidrar med før neste PC regnes ut. Noen fordeler med NIPALS er at man kan håndtere store datamengder i $\mathbf{X}$, at man kan håndtere manglende data, og at man er garantert konvergens.
+
+\subsection{Visualisering av PCA}
+Det finnes mange nyttige måter å bruke PCA på for å visualisere data. Kanskje blir dette kapitlet lengre etter hvert.
 
