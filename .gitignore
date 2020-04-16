@@ -6,3 +6,4 @@
 *.dvi
 *.fls
 *.fdb_latexmk
+datasett/*
