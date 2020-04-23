@@ -1,0 +1,44 @@
+\subsection{Mer om multippel lineær regresjon}
+Med den nye multivariate statistikken som er innført skulle man kanskje tro at den multiple lineære regresjonen som er beskrevet tidligere ville være lite nyttig. Vi skal her se at dette er det motsatte av riktig (det er feil). I dette avsnittet antar vi at målingene våre er generert av prosessen $y = X \theta + e$.
+
+\subsubsection{OLS}
+Vanlig minste kvadrater (OLS) for dataen vår minimerer $e$ i likningen $y = X \theta + e$, og er følgelig gitt av
+\begin{equation}
+	\hat{\theta}_{\textrm{OLS}} = (X^T X)^{-1} X^T y
+\end{equation}
+
+\subsubsection{TLS}
+I Total Least Squares (TLS) minimerer man ikke størrelsen til residualene, men heller størrelsen til projeksjonen av disse på modellen sin. Likningene er litt mer kompliserte, men tolkningen av hva man gjør ligner på tolkningen av PCA-komponenter.
+
+\subsubsection{PCR}
+Om man er fornøyd med resultatene fra en PCA, kan man være fristet til å benytte seg av de nye PC-ene som forklaringsvariabler. Det er det ingen som stopper deg i å gjøre. Gitt prinsipale komponenter $p_1, p_2, \dots, p_n$, kan man gjøre lineær regresjon på disse, ved å minimere $e$ i likningen
+
+\begin{equation}
+	y = \hat{\theta}_{\textrm{PCR}} p
+\end{equation}
+
+Forhåpentligvis gir dette en modell som plukker opp mer av den underliggende strukturen til prosessen som genererer dataen, og mindre av støyet. Kriteriene for at PCR skal fungere bra er stort sett de samme som for at PCA skal fungere bra.
+
+Gitt PCA sin evne til å redusere dimensjonaliteten til et datasett, kan man være fristet til å tro at PCR på en eller annen måte reduserer dimensjonaliteten til forklaringsmodellen vår. Dette er ikke tilfellet, siden hver PC er avhengig av alle variablene i vår opprinnelige modell. Heldigvis finnes det en metode for dette også.
+
+\subsubsection{Regularisering}
+I vanlig, lineær regresjon vil man i de fleste tilfeller ende opp med modeller som tar i bruk alle mulige forklaringsvariabler. Sunn fornuft kan ofte fortelle oss at vi ikke trenger alle disse variablene. I mange tilfeller vil variabelmisbruk kunne føre til overtilpasning til det gitte datasettet. Regularisering er en måte å inkorporere sunn fornuft i modellen vår på, og er rett frem å gjøre når modelltilpasningen er formulert som et optimeringsproblem. Da kan vi simpelthen legge til en kost for variabelbruk. Dvs. at vi legger føringer for strukturen til modellen vår $y = f(x)$ med en egen kostfunksjon $R(f)$, slik at kostfunksjonen vår for vanlig LS blir
+
+\begin{equation}
+	\sum_{i=0}^{n}(y_i - f(x_i))^2 + \lambda R(f)
+\end{equation}
+
+der $\lambda$ er en tuningparameter. Valget av denne er viktig, og man tester gjerne ut mange ulike, og velger den endelige verdien vha. f.eks. kryssvalidering eller en annen form for modellseleksjon.
+
+Det finnes mange typer regularisering. For $f(x)$ lineær er to vanlige valg \textbf{Tikhonov-regularisering/Ridge-regresjon}, hvor 
+\begin{equation}
+	R(f(x)) = R(\theta_1 x_1 + \cdots + \theta_n x_n) = \sum_{i = 1}^n \theta_i^2
+\end{equation}
+og en metode som enda hardere driver små $\theta_i$ til å bli eksakt 0, \textbf{LASSO}, der
+\begin{equation}
+	R(f(x)) = R(\theta_1 x_1 + \cdots + \theta_n x_n) = \sum_{i = 1}^n | \theta_i |
+\end{equation}
+For oss som virkelig er svake for modellskralhet finnes også \textbf{$\mathbf{L_0}$-regularisering}, der $R(f) = \textrm{antall ikke-null koeffisienter i } f$.
+
+\subsubsection{Gauss-Markovs teorem}
+Nå har vi gått gjennom mange former for multippel lineær regresjon, men hvilken er egentlig best? Det kommer jo an på mange ting, både datasett, faktisk modellstruktur, og mange andre ting. Men én ting kan vi si sikkert. Det er at om vi antar at $\mathbb{E}[e] = 0$, at $e$ er homoskedastisk ($\textrm{var}(e) = \sigma^2$ konstant og lik for alle $e_i$), og at $e$ for alle observasjoner er ukorrelerte ($\textrm{cov}(e_i, e_j) = 0$), så er $\hat{\theta}_\textrm{OLS}$ den beste lineære forventingsrette estimatoren (BLUE) av $\theta$. Dette er Gauss-Markovs teorem.

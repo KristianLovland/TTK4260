@@ -14,7 +14,7 @@ La vektorene $\mathbf{x}, \mathbf{y} \in V$, der $V$ er et indreprouktrom. Disse
 
 En matrise $A$ kan sees på som en \textbf{lineærtransformasjon}, f.eks. en rotasjon eller en skalering i en viss retning.
 
-\subsection{Tolkning av PCA}
+\subsubsection{Tolkning av PCA}
 PCA går kort oppsummert ut på å finne vektorer som best mulig forklarer varians i dataen, og som er ortogonale med hverandre. Håpet er at noen få av disse \textbf{prinsipale komponentene} forklarer en stor del av variansen. Metoden har en fin geometrisk tolkning. La $S$ være en sirkel, og $A$ være en lineærtransformasjon (f.eks. representert av en matrise). Da vil $A$ (med mindre den er singulær) ha egenvektorer $\mathbf{v}_1$ og $\mathbf{v}_2$. Disse vil da strekkes med faktorene $\sigma_i$, egenverdiene deres. Dette er vist i figur \ref{fig:pca_skvis}.
 
 \begin{figure}[h]
@@ -51,7 +51,7 @@ Ved å slå sammen matrisene $\mathbf{U} \mathbf{\Sigma}$ står vi igjen med en 
 	\label{fig:pca_komponentvis}
 \end{figure}
 
-\subsection{Utledning av prinsipale komponenter}
+\subsubsection{Utledning av prinsipale komponenter}
 Det finnes flere måter å finne de prinsipale komponentene. En av dem, kalt \textbf{egenverdidekomposisjonen}, baserer seg på at vi ønsker å maksimere variansen i ladningene $\mathbf{t} = \mathbf{Xp}$, der $X$ er dataen vår er $p$ er en prinsipal komponent (slik at $\mathbf{t}_j = \textrm{proj}_{\mathbf{p}} \mathbf{X}$, stol på dette). For å finne $p_1$, kan vi dermed løse optimeringsproblemet
 
 \begin{equation}
@@ -74,6 +74,6 @@ PCA kan også gjøres ved å finne SVD-en til $X$, dette finnes det funksjoner f
 
 En effektiv metode for utregning av PC-er kalles Nonlinear Iterative Partial Least Squares (\textbf{NIPALS}). Denne ble blant annet brukt i tidlige versjoner av Google sin PageRank-algoritme. Algoritmen går ut på å iterativt finne hver prinsipale komponent, og å fjerne variabiliteten denne bidrar med før neste PC regnes ut. Noen fordeler med NIPALS er at man kan håndtere store datamengder i $\mathbf{X}$, at man kan håndtere manglende data, og at man er garantert konvergens.
 
-\subsection{Visualisering av PCA}
+\subsubsection{Visualisering av PCA}
 Det finnes mange nyttige måter å bruke PCA på for å visualisere data. Kanskje blir dette kapitlet lengre etter hvert.
 
