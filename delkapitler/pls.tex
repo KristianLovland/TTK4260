@@ -1,2 +1,10 @@
 \subsection{PLS}
-Kommer snart.
+PCR har en åpenbar svakhet: Metoden baserer seg på antagelsen om at de prinsipale komponentene, kun utledet fra $x$, også forklarer variasjon i $y$. PLS ligner på PCR, men kvitter seg med denne antagelsen, og sikter heller på å finne komponenter som forklarer variasjon i $y$. Metoden beskrives ikke av noen enkel likning, men baserer seg på å regne ut latente strukturer (PLS forklares gjerne som Projection into Latent Structures) som gjør at dataen vår kan skrives på formen
+
+\begin{align}
+	X & = T P^T + E \\
+	Y & = U Q^T + F
+\end{align}
+
+Her har $P$ og $T$ samme tolkning som i PCA anvendt på $X$ (ladning og score), og $U$ og $Q$ forstås på tilsvarende vis i rommet $Y$ lever i. $E$ og $F$ er feil, som antas uavhengige med identisk fordeling. Ved hjelp av en lur måte å gjøre iterasjoner på når man regner ut disse dekomposisjonene, finner man $T$ og $U$ med stor kovarians. Pseudokode for dette, og flere refleksjoner rundt PLS kommer her om jeg får tid.
+
