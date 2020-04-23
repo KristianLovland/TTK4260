@@ -66,4 +66,7 @@ sensitivitet}}
 Om man vil finne ut hvor ulike to klassifikatorer er, kan man bruke \textbf{Kappa-koeffisient}. Dette forklares ikke mer, men det eksisterer.
 
 \subsubsection{Sammenligning av sannsynlighetsfordelinger}
-Her kan man bruke \textbf{Kullback-Leibler-divergens}.
+Her kan man bruke \textbf{Kullback-Leibler-divergens}. Denne er gitt av \begin{equation}
+		K L\left(p_{0}, p_{n}\right):=\int \log \left(\frac{p_{0}\left({\mathcal{D}}, \theta_{0}\right)}{p_{n}\left({\mathcal{D}}, \theta_{n}\right)}\right) p_{0}\left({\mathcal{D}}, \theta_{0}\right) d {\mathcal{D}}
+\end{equation}
+og beskriver informasjonen tapt (oppgitt i bits om man bruker 2 som grunntall i logaritmen) ved å representere $p_0$ med $P_n$ (tror jeg, potensielt kan det være omvendt). Mer uformelt kan verdien, som nevnt, brukes til å kvantifisere hvor ``forskjellig'' to sannsynlighetsfordelinger er.
