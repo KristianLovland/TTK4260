@@ -6,5 +6,30 @@ PCR har en åpenbar svakhet: Metoden baserer seg på antagelsen om at de prinsip
 	Y & = U Q^T + F
 \end{align}
 
-Her har $P$ og $T$ samme tolkning som i PCA anvendt på $X$ (ladning og score), og $U$ og $Q$ forstås på tilsvarende vis i rommet $Y$ lever i. $E$ og $F$ er feil, som antas uavhengige med identisk fordeling. Ved hjelp av en lur måte å gjøre iterasjoner på når man regner ut disse dekomposisjonene, finner man $T$ og $U$ med stor kovarians. Pseudokode for dette, og flere refleksjoner rundt PLS kommer her om jeg får tid.
+Her har $P$ og $T$ samme tolkning som i PCA anvendt på $X$ (ladning og score), og $U$ og $Q$ forstås på tilsvarende vis i rommet $Y$ lever i. $E$ og $F$ er feil, som antas uavhengige med identisk fordeling. Akkurat hva retningene kolonnene i $T$ og $U$ beskriver er litt vanskeligere å beskrive enn for PCA, men overordnet kan man tenke på det som at de ligner score-matrisene utregnet i PCA, men at man her også sørger for at $T$ og $U$ har stor kovarians ($T$ forklarer $U$.
+
+	For en dypere forståelse av betydningen kan det være nyttig å undersøke NIPALS-algoritmen for PLS, beskrevet under. Denne har mange likhetstrekk med den enklere NIPALS-algoritmen som finner PCA, men regner nødvendigvis ut flere matriser (alt gjøres parallelt). Som tidligere antar man at $X$ og $Y$ er sentrert.
+
+\begin{algorithm}
+	\caption{NIPALS for PLS}\label{alg:nipals_pls} \begin{algorithmic}[1] \Procedure{NIPALS}{$X, Y, n_\textrm{PLS}, t_\textrm{tol}$}\Comment{Numerisk utregning av PLS}
+	\State $i \gets 1$
+	\While{$i < n_\textrm{PLS}$}
+	\State Initialisér $u_i$ (tilfeldig, eller som en av kolonnene i $Y$)
+	\While{Endring i $t_i > t_\textrm{tol}$}
+	\State $w_i \gets \frac{X^T u_i}{|| X^T u_i ||_2}$ \Comment{Projeksjon av $X$ på $u_i$}
+	\State $t_i \gets X w_i$ \Comment{Projeksjon av $X$ på $w_i$}
+	\State $q_i \gets \frac{Y^T t_i}{|| Y^T t_i ||_2}$ \Comment{Projeksjon av $Y$ på $t_i$}
+	\State $u_i \gets Y q_i$ \Comment{Projeksjon av $Y$ på $q_i$}
+	\EndWhile
+	\State $p_f \gets \frac{X^T t_f}{t_f^T t_f}$
+	\State $b_f \gets \frac{u_f^T t_f}{t_f^T t_f}$
+	\State $X \gets X - t_i p_i^T$ \Comment {Deflasjon av $X$}
+	\State $Y \gets Y - b_i^T q_i^T$ \Comment {Deflasjon av $Y$}
+	\State $i \gets i + 1$
+	\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+Det er mye som kan sies om matrisene som returneres, men en av de viktigste plottene å undersøke er plottet av $t$ vs $u$. Dette representerer den lineære regresjonen mellom de to nye koordinatsystemene PLS definerer for $X$ og $Y$, og forteller noe om hvordan komponentene i $X$ forklarer komponentene i $Y$.
+
 

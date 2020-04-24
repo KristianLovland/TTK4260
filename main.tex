@@ -7,9 +7,20 @@
 \usepackage{amsfonts}
 \usepackage{subcaption}
 \usepackage{tikzsymbols}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
+% Redefinér til norsk tittel på figur og innholdfortegnelse, og algoritmekodeord
 \renewcommand{\figurename}{Fig.}
 \renewcommand{\contentsname}{Innhold}
+
+\algrenewcommand\algorithmicwhile{\textbf{mens}}
+\algrenewcommand\algorithmicdo{\textbf{gjør}}
+\algrenewcommand\algorithmicend{\textbf{slutt}}
+\algrenewcommand\algorithmicprocedure{\textbf{prosedyre}}
+\makeatletter
+\renewcommand{\ALG@name}{Algoritme}
+\makeatother
 
 \title{TTK4260 Innføring i Multivariat Datamodellering}
 \date{}

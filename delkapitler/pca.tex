@@ -72,7 +72,39 @@ PCA kan også gjøres ved å finne SVD-en til $X$, dette finnes det funksjoner f
 	\mathbf{X} = \mathbf{t}_1 \mathbf{p}_1^T + \mathbf{t}_2 \mathbf{p}_2^T + \cdots + \mathbf{E} = \sigma_1 \mathbf{u}_1 \mathbf{v}_1^T +  \sigma_2 \mathbf{u}_2 \mathbf{v}_2^T + \mathbf{E} 
 \end{equation}
 
-En effektiv metode for utregning av PC-er kalles Nonlinear Iterative Partial Least Squares (\textbf{NIPALS}). Denne ble blant annet brukt i tidlige versjoner av Google sin PageRank-algoritme. Algoritmen går ut på å iterativt finne hver prinsipale komponent, og å fjerne variabiliteten denne bidrar med før neste PC regnes ut. Noen fordeler med NIPALS er at man kan håndtere store datamengder i $\mathbf{X}$, at man kan håndtere manglende data, og at man er garantert konvergens.
+
+\subsubsection{NIPALS-algoritmen}
+En effektiv metode for utregning av PC-er kalles Nonlinear Iterative Partial Least Squares (\textbf{NIPALS}). Denne ble blant annet brukt i tidlige versjoner av Google sin PageRank-algoritme. Algoritmen går ut på å iterativt finne hver prinsipale komponent, og å fjerne variabiliteten denne bidrar med før neste PC regnes ut. Noen fordeler med NIPALS er at man kan håndtere store datamengder i $\mathbf{X}$, at man kan håndtere manglende data, og at man er garantert konvergens. Pseudokoden under viser algoritmen. Merk at projeksjon av en matrise $X$ på en vektor $t$ etterfulgt av en normalisering mer kompakt kan skrives som 
+\begin{equation}\frac{\textrm{proj}_t(X)}{|| \textrm{proj}_t(X) ||_2} = \frac{X^T t / t^T t}{|| X^T t / t^T t ||_2} = \frac{X^T t / t^T t}{\sqrt{(X^T t)^T (X^T t) / (t^T t)^2}} = \frac{X^T t}{|| X^T t ||_2}
+\label{eq:normalisering_triks}
+\end{equation}
+Hovedideen bak NIPALS er å utlede ytreproduktene $t_i p_i^T$ én og én, med høyeste varians først. Disse vektorene finnes ved å iterativt tilpasse $p$ til $t$ vha. $X$, $t$ til $p$ vha. $X$, frem og tilbake helt til resultatet stabiliserer seg (dette kalles gjerne ``criss-cross regressions''). Pseudokode for NIPALS er som følger (merk at man antar at $X$ allerede er sentrert).
+
+\begin{algorithm}
+	\caption{NIPALS for PCA}\label{alg:nipals_pca} \begin{algorithmic}[1] \Procedure{NIPALS}{$X, n_\textrm{PCA}, t_\textrm{tol}$}\Comment{Numerisk utregning av PCA}
+	\State $i \gets 1$
+	\While{$i < n_\textrm{PCA}$}
+	\State Initialisér $t_i$ (tilfeldig, eller som en av kolonnene i $X$)
+	\While{Endring i $t_i > t_\textrm{tol}$}
+	\State $p_i \gets \frac{X^T t_i}{|| X^T t_i ||_2}$ \Comment{Projeksjon av $X$ på $t_i$}
+	\State $t_i \gets X p_i$ \Comment{Projeksjon av $X$ på $p_i$}
+	\EndWhile
+	\State $X \gets X - t_i p_i^T$ \Comment {Deflasjon}
+	\State $i \gets i + 1$
+	\EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+%\begin{algorithm}
+%	\caption{NIPALS for PCA}
+%	\label{alg:NIPALS_PCA}
+%	\begin{algorithmic[1]}
+%		\Procedure{NIPALS}{$X$}
+%		\State Sentrér $X$-matrisen
+%		\EndProcedure
+%	\end{algorithmic}
+%\end{algorithm}
 
 \subsubsection{Visualisering av PCA}
 Det finnes mange nyttige måter å bruke PCA på for å visualisere data. Kanskje blir dette kapitlet lengre etter hvert.
