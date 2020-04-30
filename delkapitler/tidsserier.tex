@@ -1,0 +1,132 @@
+\subsection{Tidsserier}
+\subsubsection{Modellstruktur}
+Å jobbe med kontinuerlige systemer av ulineære differensiallikninger
+
+\begin{equation}
+	\dot{x} = f(x, u)
+\end{equation}
+har manger fordeler, men mulighet for å simulering og tilpassing av måledata er ikke en av dem. I den virkelige verden er vi typisk gitt tidsseriedata $X = [x_1 \quad \cdots \quad x_n]$, der hver $x_i$ er en kolonnevektor som inneholder en tidsserie med målinger av tilstanden $x_i$. Om vi mistenker at et system har en bestemt struktur $f(x, u)$ kan vi linearisere
+
+\begin{equation}
+	f(x) \approx f(x_0) + \nabla f_{x_0} (x - x_0)
+\end{equation}
+
+og deretter diskretisere
+
+\begin{equation}
+	\frac{df}{dt} \approx \frac{f(\Delta (k+1)) - f(\Delta k)}{\Delta}
+\end{equation}
+
+Vi innfører notasjonen $y(\Delta k) = y(k)$ for systemer i diskret tid, og z-operatoren
+
+\begin{equation}
+	z^r y(k) = y(k + r)
+\end{equation}
+
+Med denne operatoren definert er vi klar til å skrive alle differenslikninger
+
+\begin{equation}
+	y(t) + a_1 y(t-1) + \cdots + a_{n_a} y(t - n_a) = b_0 u(t) + \cdots + b_{n_b} u(t - n_b) + e(t)
+\end{equation}
+
+som en transferfunksjon
+
+\begin{equation}
+y(t) = \frac{B(q)}{A(q)} u(t) + \frac{1}{A(q)}e(t)
+\end{equation}
+
+der 
+
+\begin{equation}
+	A(q)=1+a_{1} q^{-1}+\ldots+a_{n_{a}} q^{-n_{a}}
+\end{equation}
+
+og
+
+\begin{equation}
+	B(q)=b_{1} q^{-1}+\ldots+b_{n_{b}} q^{-n_{b}}
+\end{equation}
+
+og vi av en eller annen grunn har byttet ut bokstaven $z$ med $q$. Denne modellen er en såkalt \textbf{ARX-modell}. AR fordi den er autoregressiv (y har en form for dynamikk), X fordi den er eksogen (har en input).
+
+Om man kjenner $e$ kan man inkludere målinger av denne i modellen gjennom transferfunksjonen
+
+\begin{equation}
+	C(q)=1+c_{1} q^{-1}+\ldots+c_{n_{c}} q^{-n_{c}}
+\end{equation}
+
+og få en \textbf{ARMAX}-modell (MA = Moving Average) på formen
+
+\begin{equation}
+	y(t) = \frac{B(q)}{A(q)} u(t) + \frac{C(q)}{A(q)}e(t)
+\end{equation}
+
+Disse modellene har noen restriksjoner, f.eks. at både $u$ og $e$ har samme nevner (dvs. utsettes for samme dynamikk). En mer generell modell er \textbf{Box-Jenkins}-modellen, der
+
+\begin{equation}
+	y(t)=\frac{B(q)}{F(q)} u(t)+\frac{C(q)}{D(q)} e(t)
+\end{equation}
+om man setter $C(q) = D(q)$ for man en \textbf{Output Error}-modell. Det kan imidlertid være problematisk med så generelle modeller. Kanskje kommer jeg tilbake til det.
+
+\subsubsection{Ettstegsprediktorer}
+Heretter vil vi anta at vi har valgt en modellstruktur, og jobber med et system på formen
+
+\begin{equation}
+	y(t) = G(q) u(t) + H(q) e(t)
+\end{equation}
+hvor vi antar at $H(q)$ er monisk og minimum fase (dette blir nyttig senere).
+
+Et naturlig ønske vil være å finne ut hvor systemet vil ende opp ved neste tidssteg gitt nåværende tilstand, dvs. finne en ettstegsprediktor $\hat{y}(t | t-1)$. Siden $u(t)$ velges av oss er den kjent, men $e(t)$ er ikke det. Derfor må effekten av denne estimeres. La $v(t) = H(q) e(t)$. Om vi klarer å finne en ettstegsprediktor $\hat{v}(t | t-1)$ kan vi enkelt finne $\hat{y}(t | t-1) = G(q) u(t) + \hat{v}(t | t-1)$. Men hvordan kan vi finne denne prediktoren? Jo, bare se her
+
+\begin{equation}
+v(t)=H(q) e(t)=\sum_{k=0}^{+\infty} h(k) e(t-k)=e(t)+\sum_{k=1}^{+\infty} h(k) e(t-k) \\
+\end{equation}
+
+\begin{equation}
+\Longrightarrow \quad \widehat{v}(t | t-1)=\sum_{k=1}^{+\infty} h(k) e(t-k)
+\end{equation}
+
+fordi vi får et best mulig estimat ved å anta $e(t) = \mu_e = 0$, tror jeg. Skrevet om på transferfunksjonform får vi
+
+\begin{equation}
+	\hat{v}(t | t-1) = [H(q) - 1] e(t) = [1 - H^{-1}(q)] v(t)
+\end{equation}
+altså er det av interesse å finne $H^{-1}(q)$. Ved hjelp av litt utregning kan man da finne ut praktisk uttrykk for tilstandsprediktoren $\hat{y}$, gitt av
+
+\begin{equation}
+	\hat{y}(t | t-1) = H^{-1}(q) G(q) u(t) + [1 - H^{-1}(q)] y(t)
+	\label{eq:predictor}
+\end{equation}
+
+Merk at siden vi antar $H(q)$ monisk, så inneholder leddet $1 - H^{-1}(q)]$ ingen konstantledd, så prediktoren er ikke avhenig av kjennskap til $y(t)$. Vi har antatt $H(q)$ minimum fase, så impulsresponsen dens eksisterer og gir oss en veldefinert prediksjon. Nærmere bestemt er
+
+\begin{equation}
+	\left[H^{-1}(q) G(q)\right] u(t)=\left[\sum_{k=1}^{+\infty} \ell(k) q^{-k}\right] u(t)
+\end{equation}
+
+og
+
+\begin{equation}
+	\left[1-H^{-1}(q)\right] y(t)=\left[-\sum_{k=1}^{+\infty} \widetilde{h}(k) q^{-k}\right] y(t)
+\end{equation}
+
+I praksis vil vi lette på kravet om at summene skal gå til $\infty$, og heller la dem gå til $t$. Forhåpentligvis vil impulsresponsen avta raskt og eksponensielt nok til at prediksjonen blir nokså nærme sannheten.
+
+Merk at hittil har vi ikke utnyttet noen informasjon om de statistiske egenskapene til $e(t)$. Det skal vi heller ikke gjøre, men en liten fun fact er at om $e(t)$ er Gaussisk, er den optimale $\hat{y}(t | t-1)$ gitt av Kalmanfilteret.
+
+\subsubsection{Systemidentifikasjon}
+Nå står vi bare igjen med et lite spørsmål: Hvordan finner vi $H^{-1}(q)$ og alle dens venner, som kreves for å gjennomføre disse prediksjonene? Dette gjøres ganske rett frem ved å minimere en eller annen loss-funksjon $\ell ( y - \hat{y} )$. Man velger da gjerne en mengde modellstrukturer $M_j$ med tilhørende parametre $\theta_j$ gitt av
+
+\begin{equation}
+	\theta_{j}^{*}=\underset{\theta_{j} \in \Theta_{j}}{\min } \sum_{t} \ell\left(-H^{-1}(q) G(q) u(t)+H^{-1}(q) y(t)\right)
+\end{equation}
+og velger modellstruktur basert på et eller annet kriterie (AIC, BIC, eller noe annet). Ved å sette inn verdiene for $H(q)$ og $G(q)$ gitt i avsnittet om modellstrukturer i likning \ref{eq:predictor}.
+
+Merk at det finnes massevis av praktiske hensyn som burde tas, som ikke er nevnt her. Et av de viktigste er persistent eksitasjon, som handler om hvor mye informasjon den gitte inputen gir om systemets dynamikk. For eksempel vil ikke et pådrag $u(t) = 0$ gi særlig mye informasjon om $G(q)$. Om $G(q)$ er komplisert vil $u(t)$ typisk måtte være mer komplisert for å få vite dette. Et typisk krav for mange parameterestimeringsmetoder er at $u(t)$ må oppfylle at det eksisterer konstanter $\alpha_0, \alpha_1, T_0 > 0$ slik at 
+
+\begin{equation}
+	\alpha_0 I \leq \frac{1}{T_0} \int_t^{t + T_0} u(\tau) u(\tau)^T d\tau \leq \alpha_1 I \quad \textrm{for alle } t \leq 0
+\end{equation}
+
+$u(t)$ kalles da persistent eksiterende.
+
