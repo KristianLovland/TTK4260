@@ -1,2 +1,29 @@
 \subsection{ICA}
-Dette blir kult.
+PCA gir en god og forståelig måte å finne struktur i komplisert data på, men som alle andre metoder gjør den noen antagelser som ikke alltid er gyldige. En av disse er at dataen kommer fra én enkelt kilde. Men hva om man vil analysere en enkelt stemme i en gruppe på flere (cocktail party-problemet)? Eller om man vil (annet eksempel)? Dette er motivasjonen for \textbf{Independent Component Analysis (ICA)}.
+
+Problemet kan formuleres mer presist. Gitt en lineærekombinasjon (nok en antagelse, men jaja) av $N$ distinkte signaler, dvs. hver $x_j$ i datasettet er gitt av
+
+\begin{equation}
+	x_j = a_{j1} s_1 + a_{j2} s_2 + \cdots + a_{jN} s_N
+\end{equation}
+er målet å finne de originale kildene til dataen vår, dvs. $s_1, s_2, \dots, s_N$. På matriseform kan dette skrives som
+
+\begin{equation}
+	x = A s
+\end{equation}
+Så da bare inverterer vi $A$ og setter $s = A^{-1} x$. Neida, det er nok ikke så enkelt. Bare tulla litt.
+
+Målet vårt er å finne $s$ under så slappe antagelser som mulig. Vi antar at hvert par $s_i, s_j$ er statistisk uavhengige. Ellers ville det ikke vært mulig å skille hvilken årsak som førte til hvilken effekt.
+
+Utgangspunktet for metoden er singulærverdidekomposisjonen, dvs. transformasjonen
+
+\begin{equation}
+	A = U \Sigma V^*
+\end{equation}
+der $U, V^*$ er unitære matriser (tenkes på som rotasjoner) og $\Sigma$ er diagonal (altså er den en skalering). Siden $x = A s$ ville vi med kjennskap til $A$ kunne finne $s$ ved å anvende $U^*$, $\Sigma^{-1}$ og $V$ etter hverandre i den rekkefølge, og da få en approksimasjon av $s = (U \Sigma V^*)^{-1} x = V \Sigma^{-1} U^* x$. Dessverre kjenner vi ikke $A$. Bevæpnet med tolkningene av $U$, $\Sigma$ og $V^*$ som vi har fra den tidligere diskusjonen av SVD kan vi imidlertid gjøre et forsøk. ICA kan rettferdiggjøres vha. informasjonsteori, som en måte å minimere den felles informasjonen mellom $s_1$ og $s_2$. Her holder vi oss imidlertid til den enklere, geometriske tolkningen.
+
+For å tilnærme $U^*$ fra data, kan man simpelthen regne ut retningen i dataen som minimerer varians. Ved å la $U^*$ være en matrise parametrisert av vinkelen $\theta$ kan man minimere variansen til dataen $x$ mhp. $\theta$, og la $U^*$ være rotasjonsmatrisen som roterer med denne vinkelen, gjerne kalt $\theta_0$. Deretter finner man $\Sigma^{-1}$ ved å regne ut variansen langs hver retning i (det nye) koordinatsystemet. Den mest utfordrende delen av ICA kommer nå: Vi har allerede brukt middelverdi og varians, så vi trenger ny informasjon som ikke er avhengig av noen av disse, dvs. at vi trenger høyere ordens momenter. Derfor må vi også anta at $s$ ikke er normalfordelt (for da vil alle momenter av orden over to være null). Det finnes ulike måter å rettferdiggjøre de ulike metodene man kan bruke for å finne $V$, men én metode som er forholdsvis enkel er å maksimere fjerde ordens moment, \textbf{kurtose}. Denne henger sammen med ikke-gaussiskhet, som ønskes maksimert for å best mulig skille datakildene fra hverandre (dette kan også rettferdiggjøres beddre enn jeg gjør det her). Siden $U^*$ representerer en rotasjon, parametriserer vi denne ved variabelen $\phi$, og løser $\frac{d \textrm{Kurt}}{d \phi} = 0$. Løsningen, som vi kaller $\phi_0$, er rotasjonen $U^*$ beskriver. Vi har nå alt vi trenger for å finne
+
+\begin{equation}
+	s = V \Sigma^{-1} U^* x
+\end{equation}

@@ -1,0 +1,11 @@
+\subsection{Nevrale nettverk}
+Vi ønsker å approksimere en funksjon
+
+\begin{equation}
+	y = f(x)
+\end{equation}
+der $y \in \mathbb{R}^{n_y}$ og $x \in \mathbb{R}^{n_x}$. Vi kan gjøre vanlig lineær regresjon, men hva om $f$ er ulineær, eller $y$ består av kategorisk data?
+
+Definér en \textbf{dybde} $n$. For $i = 1, 2, \dots, n$, definer \textbf{bredden} $n_i$. La $n_0 = n_x$. La $W^{(i-1)} \in \mathbb{R}^{n_i \times n_{i-1}}$ for $i = 1, 2, \dots, n$. For hver $i$, definér \textbf{aktiveringsfunksjonen} $\sigma_i$, og for en vektor $v = [v_1 \quad \cdots \quad v_n]^T$, skriv $\sigma(v) = [\sigma(v_1) \quad \cdots \quad \sigma(v_n)]^T$. La $a^{(0)} = x$, og $a^{(i)} = \sigma_i( W^{(i-1)} a^{(i-1)} )$ for $i = 1, 2, \dots, n$. La $\hat{y} = a^{(n)}$. Finn parametre $W^{(i)}$ for alle $i$ som minimerer avviket mellom $\hat{y}$ og $y$ for datasettet ditt. Dette er et nevralt nettverk. Hver vektor $a^{(i)}$ illustreres gjerne som en kolonne av noder, med input og output mellom hver kolonne (som er en vektorvaluert funksjon) tegnet opp som streker. Denne grafen brukes gjerne heller enn den tråkige notasjonen over for å illsutrere hva slags nettverk man bruker.
+
+Dette var ingen god forklaring, men det var en veldig kompakt oppsummering av hvordan det fungerer. Valget av $n$, $\sigma$ og alle $n_i$ er en helt egen vitenskap, det samme er hvordan man basert på disse finner $W$ på en effektiv måte. Uansett hva slags problem man vil bruke et nevralt nettverk til å løse, er det viktig å velge et som har en struktur som godt representerer den faktiske prosessen som generer $y$, har jeg hørt. Mer kommer jeg ikke til å si om den saken.
