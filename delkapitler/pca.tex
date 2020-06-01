@@ -15,7 +15,9 @@ La vektorene $\mathbf{x}, \mathbf{y} \in V$, der $V$ er et indreprouktrom. Disse
 En matrise $A$ kan sees på som en \textbf{lineærtransformasjon}, f.eks. en rotasjon eller en skalering i en viss retning.
 
 \subsubsection{Tolkning av PCA}
-PCA går kort oppsummert ut på å finne vektorer som best mulig forklarer varians i dataen, og som er ortogonale med hverandre. Håpet er at noen få av disse \textbf{prinsipale komponentene} forklarer en stor del av variansen. Metoden har en fin geometrisk tolkning. La $S$ være en sirkel, og $A$ være en lineærtransformasjon (f.eks. representert av en matrise). Da vil $A$ (med mindre den er singulær) ha egenvektorer $\mathbf{v}_1$ og $\mathbf{v}_2$. Disse vil da strekkes med faktorene $\sigma_i$, egenverdiene deres. Dette er vist i figur \ref{fig:pca_skvis}.
+PCA går kort oppsummert ut på å finne vektorer som best mulig forklarer varians i dataen, og som er ortogonale med hverandre. Håpet er at noen få av disse \textbf{prinsipale komponentene} forklarer en stor del av variansen. Den geometriske tolkningen ligner på tolkningen av lineær regresjon, der man finner en linje som passer en emngde punkter. I PCA kan man imidlertid legge til dimensjoner slik at man tilpasser et plan, eller flater av enda høyere dimensjon. 
+
+For å forstå PCA kan det være nyttif å forstå \textbf{Singulørverdidekomposisjonen (SVD)}, og den gemoetriske tolkningen av denne. La $S$ være en sirkel, og $A$ være en lineærtransformasjon (f.eks. representert av en matrise). Da vil $A$ (med mindre den er singulær) ha egenvektorer $\mathbf{v}_1$ og $\mathbf{v}_2$. Disse vil da strekkes med faktorene $\sigma_i$, egenverdiene deres. Dette er vist i figur \ref{fig:pca_skvis}.
 
 \begin{figure}[h]
 	\centering
@@ -36,13 +38,13 @@ For høyere dimensjon enn 2 (som i figuren) vil likningene være helt like. En h
 	A \mathbf{V} =\mathbf{U} \mathbf{\Sigma}
 \end{equation}
 
-Hvis egenvektorene til $A$ er lineært uavhengige, vil $\mathbf{V}$ være invertibel, og vi kan definere \textbf{singulærverdidekomposisjonen}
+Hvis egenvektorene til $A$ er lineært uavhengige, vil $\mathbf{V}$ være invertibel, og vi kan definere singulærverdidekomposisjonen
 
 \begin{equation}
 	A  =\mathbf{U} \mathbf{\Sigma} \mathbf{V}^*
 \end{equation}
 
-Ved å slå sammen matrisene $\mathbf{U} \mathbf{\Sigma}$ står vi igjen med en ny tolkning av $A$, forklart av kolonnene i $\mathbf{V}^*$ og kolonnene i $\mathbf{U} \mathbf{\Sigma}$. Dette er illustrert i figur \ref{fig:pca_komponentvis}. Mye av styrken til PCA ligger i at hvis $A$ har en lav nok underliggende dimensjon, kan vi approksimere $A$ ganske bra ved å kaste bort vektorene som svarer til lave singulærverdier $\sigma_i$. Modellordenen reduseres drastisk uten at vi mister viktig informasjon \Cooley.
+Ved å slå sammen matrisene $\mathbf{U} \mathbf{\Sigma}$ står vi igjen med en ny tolkning av $A$, forklart av kolonnene i $\mathbf{V}^*$ og kolonnene i $\mathbf{U} \mathbf{\Sigma}$. Dette er illustrert i figur \ref{fig:pca_komponentvis} der $A$ er en sum av vektorytreprodukter (som er matriser med rang 1). Mye av styrken til PCA ligger i at hvis $A$ har en lav nok underliggende dimensjon, kan vi approksimere $A$ ganske bra ved å kaste bort vektorene som svarer til lave singulærverdier $\sigma_i$. Modellordenen reduseres drastisk uten at vi mister viktig informasjon \Cooley.
 
 \begin{figure}[h]
 	\centering
@@ -95,16 +97,6 @@ Hovedideen bak NIPALS er å utlede ytreproduktene $t_i p_i^T$ én og én, med h�
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
-
-%\begin{algorithm}
-%	\caption{NIPALS for PCA}
-%	\label{alg:NIPALS_PCA}
-%	\begin{algorithmic[1]}
-%		\Procedure{NIPALS}{$X$}
-%		\State Sentrér $X$-matrisen
-%		\EndProcedure
-%	\end{algorithmic}
-%\end{algorithm}
 
 \subsubsection{Visualisering av PCA}
 Det finnes mange nyttige måter å bruke PCA på for å visualisere data. Kanskje blir dette kapitlet lengre etter hvert.

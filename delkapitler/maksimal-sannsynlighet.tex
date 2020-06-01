@@ -7,7 +7,7 @@ Med dette definert er vi klare for å definere vår maksimale sannsynlighetsesti
 \end{equation}
 Vi ser at denne ligner i formen på LS-estimatoren, men at funksjonen $p$ gir oss mer valgfrihet, og muligheter til å inkludere kjent informasjon om modell og data.
 
-Det er verdt å merke seg at et ML-estimat ikke nødvendigvis trenger å eksistere. Man kan komme opp med massevis av eksempler på at denne ikke eksiterer, f.eks. kan man la $\Theta$ er en åpen mengde. Hvis $p$ er kontinuerlig og $\Theta$ er kompakt tror jeg imidlertid vi kan føle oss ganske trygge, i hvert fall hvis man er av typen som stoler på det Weierstrass hadde å si oss.
+Det er verdt å merke seg at et ML-estimat ikke nødvendigvis trenger å eksistere. Man kan komme med moteksempler, men under realistiske antagelser eksisterer stort sett et ML-estimat. 
 
 Et viktig eksempel på en ML-estimator er når $p$ er normalfordelt. Da vil sannsynlighetsfunksjonen til et datasett være gitt av
 \begin{equation}
@@ -32,4 +32,4 @@ Dennes gradient settes lik null, men her vil det inngå informasjon vi ikke har 
 \begin{equation}
 \bar{\sigma}^{2}=\frac{1}{N} \sum_{t=1}^{N}\left(y_{t}-\bar{m}\right)^{2}
 \end{equation}
-som ser fornuftig ut.
+som ser fornuftig ut. Man kan utlede forskjellige estimatorer avhengig av $p$, men som nevnt kommer det meste av estimatorer vi jobber med til å basere seg på antagelsen om at verden er normalfordelt.

@@ -1,6 +1,6 @@
 \subsection{Minste kvadrater}
 \label{sec:minste_kvadrater}
-En naturlig tolkning av spørsmålet om å best mulig forklare datasettet vha $\theta$, er å finne parameteren som ved bruk av vår antatte modell $f(u_t; \theta)$, gir den korteste avstanden fra predikert datasett til faktisk datasett. "Avstand" har her den vanlige, euklidiske tolkningen, slik at en minste kvadraters estimator av en parameter $\theta$ gitt et datasett $\mathcal{D}$ og en modell $f(u_t; \theta)$, er gitt av
+En naturlig tolkning av spørsmålet om å best mulig forklare datasettet vha $\theta$, er å finne parameteren som ved bruk av vår antatte modell $f(u_t; \theta)$, gir den korteste avstanden fra predikert datasett til faktisk datasett. En minste kvadraters estimator av en parameter $\theta$ gitt et datasett $\mathcal{D}$ og en modell $f(u_t; \theta)$, er da gitt av
 \begin{equation}
 \widehat{\theta}_{\mathrm{LS}}=\arg \min _{\theta \in \Theta}\left\|\left[\begin{array}{c}
 {y_{1}} \\
@@ -12,7 +12,6 @@ En naturlig tolkning av spørsmålet om å best mulig forklare datasettet vha $\
 {f\left(u_{N} ; \theta\right)}
 \end{array}\right]\right\|^{2}=\arg \min _{\theta \in \Theta} \sum_{t=1}^{N}\left(y_{t}-f\left(u_{t} ; \theta\right)\right)^{2}
 \end{equation}
-En nyttig verdi som følger av dette estimatet er residualen $r_{t}(\theta):=y_{t}-f\left(u_{t} ; \theta\right)$.
 
 En nyttig klasse av problemer er de \textbf{separable} problemene. Disse er på formen
 \begin{equation}
@@ -52,14 +51,9 @@ Ved å derivere dette og sette det lik null får vi \textbf{normallikningene}
 \end{equation}
 Men hva om $
 \Phi(\boldsymbol{u})^{T} \Phi(\boldsymbol{u})
-$ ikke er invertibel? Da vil ikke normallikningene ha noen entydig løsning. Dette ordner vi ved å bruke \textbf{pseudoinversen}, som har noen kjekke egenskaper (nærmeste løsning hvis ingen løsning eksisterer, løsning med minst norm hvis mange løsninger eksisterer).
+$ ikke er invertibel? Da vil ikke normallikningene ha noen entydig løsning. Dette ordner vi ved å bruke \textbf{pseudoinversen}, som har noen kjekke egenskaper (den gir nærmeste løsning hvis ingen løsning eksisterer, løsning med minst norm hvis mange løsninger eksisterer).
 
-Noen ganger er imidlertid ikke alle tilstander like viktige. Dette løser vi ved å multiplisere hver feil med en vekt, slik at minimeringsproblemet (for ubegrensede problemer) blir
-\begin{equation}
-\widehat{\theta}_{\mathrm{WLS}}=\arg \min _{\boldsymbol{\theta} \in \mathbb{R}^{n}}(\boldsymbol{y}-\Phi(\boldsymbol{u}) \boldsymbol{\theta})^{T} W(\boldsymbol{y}-\Phi(\boldsymbol{u}) \boldsymbol{\theta})
-\end{equation}
-Mer kompakt kan dette skrives som $
-=\arg \min _{\boldsymbol{\theta} \in \mathbb{R}^{n}}\|\boldsymbol{y}-\Phi(\boldsymbol{u}) \boldsymbol{\theta}\|_{W^{-1}}^{2}
+Hvis man vil vektlegge minimeringen av noen tilstander mer enn andre, kan man gjøre dette med en vektmatrise $W$ slik at $\theta=\arg \min _{\boldsymbol{\theta} \in \mathbb{R}^{n}}\|\boldsymbol{y}-\Phi(\boldsymbol{u}) \boldsymbol{\theta}\|_{W^{-1}}^{2}
 $. Et nytt sett med normalligninger faller ut av dette, nå blir 
 \begin{equation}
 \Phi(\boldsymbol{u})^{T} W \Phi(\boldsymbol{u}) \boldsymbol{\theta}=\Phi(\boldsymbol{u})^{T} W \boldsymbol{y}

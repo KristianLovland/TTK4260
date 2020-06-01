@@ -1,14 +1,14 @@
 \subsection{PLS}
-PCR har en åpenbar svakhet: Metoden baserer seg på antagelsen om at de prinsipale komponentene, kun utledet fra $x$, også forklarer variasjon i $y$. PLS ligner på PCR, men kvitter seg med denne antagelsen, og sikter heller på å finne komponenter som forklarer variasjon i $y$. Metoden beskrives ikke av noen enkel likning, men baserer seg på å regne ut latente strukturer (PLS forklares gjerne som Projection into Latent Structures) som gjør at dataen vår kan skrives på formen
+PCR har en åpenbar svakhet: Metoden baserer seg på antagelsen om at de prinsipale komponentene, kun utledet fra $x$, også er egnet til å forklare $y$. PLS ligner på PCR, men kvitter seg med denne antagelsen, og sikter heller på å finne komponenter som forklarer variasjon i $y$. Metoden beskrives ikke av noen enkel likning, men baserer seg på å regne ut latente strukturer (PLS forklares gjerne som Projection into Latent Structures) som gjør at dataen vår kan skrives på formen
 
 \begin{align}
 	X & = T P^T + E \\
 	Y & = U Q^T + F
 \end{align}
 
-Her har $P$ og $T$ samme tolkning som i PCA anvendt på $X$ (ladning og score), og $U$ og $Q$ forstås på tilsvarende vis i rommet $Y$ lever i. $E$ og $F$ er feil, som antas uavhengige med identisk fordeling. Akkurat hva retningene kolonnene i $T$ og $U$ beskriver er litt vanskeligere å beskrive enn for PCA, men overordnet kan man tenke på det som at de ligner score-matrisene utregnet i PCA, men at man her også sørger for at $T$ og $U$ har stor kovarians ($T$ forklarer $U$.
+Her har $P$ og $T$ samme tolkning som i PCA anvendt på $X$ (ladning og score), og $U$ og $Q$ forstås på tilsvarende vis i rommet $Y$ lever i. $E$ og $F$ er feilmatriser, som antas uavhengige med identisk fordeling. Akkurat hva retningene kolonnene i $T$ og $U$ beskriver er litt vanskeligere å beskrive enn for PCA, men overordnet kan man tenke på det som at de ligner score-matrisene utregnet i PCA, men at man her også sørger for at $T$ og $U$ har stor kovarians ($T$ forklarer $U$.
 
-	For en dypere forståelse av betydningen kan det være nyttig å undersøke NIPALS-algoritmen for PLS, beskrevet under. Denne har mange likhetstrekk med den enklere NIPALS-algoritmen som finner PCA, men regner nødvendigvis ut flere matriser (alt gjøres parallelt). Som tidligere antar man at $X$ og $Y$ er sentrert.
+For en dypere forståelse av betydningen kan det være nyttig å undersøke NIPALS-algoritmen for PLS, beskrevet under. Denne har mange likhetstrekk med den enklere NIPALS-algoritmen som finner PCA, men regner nødvendigvis ut flere matriser (alt gjøres parallelt). Som tidligere antar man at $X$ og $Y$ er sentrert.
 
 \begin{algorithm}
 	\caption{NIPALS for PLS}\label{alg:nipals_pls} \begin{algorithmic}[1] \Procedure{NIPALS}{$X, Y, n_\textrm{PLS}, t_\textrm{tol}$}\Comment{Numerisk utregning av PLS}
@@ -30,6 +30,5 @@ Her har $P$ og $T$ samme tolkning som i PCA anvendt på $X$ (ladning og score), 
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
-Det er mye som kan sies om matrisene som returneres, men en av de viktigste plottene å undersøke er plottet av $t$ vs $u$. Dette representerer den lineære regresjonen mellom de to nye koordinatsystemene PLS definerer for $X$ og $Y$, og forteller noe om hvordan komponentene i $X$ forklarer komponentene i $Y$.
-
+Det er mye som kan sies om matrisene som returneres, men en av de viktigste plottene å undersøke er plottet av $t$ vs $u$. Dette representerer den lineære regresjonen mellom de to nye koordinatsystemene PLS definerer for $X$ og $Y$, og forteller noe om hvordan komponentene i $X$ forklarer komponentene i $Y$. Det er også verdt å merke seg at vi har definert en ny matrise, $W$, som kalles $X$-\textbf{loading weights}. Det er denne som plottes (i stedet for $P$) når man tolker PLS-regresjon, siden det er denne som maksimerer kovariansen mellom $t$ og $u$ (motivasjonen for PLS).  
 

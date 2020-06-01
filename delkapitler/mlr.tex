@@ -1,4 +1,4 @@
-\subsection{Mer om multippel lineær regresjon}
+\subsection{Multippel lineær regresjon}
 Med den nye multivariate statistikken som er innført skulle man kanskje tro at den multiple lineære regresjonen som er beskrevet tidligere ville være lite nyttig. Vi skal her se at dette er det motsatte av riktig (det er feil). I dette avsnittet antar vi at målingene våre er generert av prosessen $y = X \theta + e$.
 
 \subsubsection{OLS}
@@ -6,7 +6,7 @@ Vanlig minste kvadrater (OLS) for dataen vår minimerer $e$ i likningen $y = X \
 \begin{equation}
 	\hat{\theta}_{\textrm{OLS}} = (X^T X)^{-1} X^T y
 \end{equation}
-Den numerisk anlagte leser vil reagere på leddet $(X^T X)^{-1}$, og det med rette. Hvis $X$ inneholder kolonner som avhenger mer eller mindre lineært av hverandre (høy kolinearitet) vil det kunne føre til numerisk ustabilitet. Dette er en av flere problemer som motiverer metodene som snart beskrives.
+Den numerisk anlagte leser vil reagere på leddet $(X^T X)^{-1}$, og det med rette. Hvis $X$ inneholder kolonner som avhenger mer eller mindre lineært av hverandre (høy kolinearitet) vil det kunne føre til numerisk ustabilitet. Dette er et av flere problemer som motiverer metodene som snart beskrives.
 
 \subsubsection{TLS}
 I Total Least Squares (TLS) minimerer man ikke størrelsen til residualene, men heller størrelsen til projeksjonen av disse på modellen sin. Likningene er litt mer kompliserte, men tolkningen av hva man gjør ligner på tolkningen av PCA-komponenter.
@@ -18,7 +18,7 @@ Om man er fornøyd med resultatene fra en PCA, kan man være fristet til å beny
 	y = \hat{\theta}_{\textrm{PCR}} p
 \end{equation}
 
-Forhåpentligvis gir dette en modell som plukker opp mer av den underliggende strukturen til prosessen som genererer dataen, og mindre av støyet. Kriteriene for at PCR skal fungere bra er stort sett de samme som for at PCA skal fungere bra. En forskjell det er verdt å merke seg er imidlertid at når man skal velge antall komponenter, vil det i en PCR gi mer mening å velge basert på hvor godt den resulterende modellen forklarer $y$ (gjerne ved hjelp av et testsett) enn å gjøre som man vanligvis gjør i PCA.
+Forhåpentligvis gir dette en modell som plukker opp mer av den underliggende strukturen til prosessen som genererer dataen, og mindre av støyet. Kriteriene for at PCR skal fungere bra er stort sett de samme som for at PCA skal fungere bra. En forskjell det er verdt å merke seg er imidlertid at når man skal velge antall komponenter, vil det i en PCR gi mer mening å velge basert på hvor godt den resulterende modellen forklarer $y$ enn å gjøre som man vanligvis gjør i PCA. Om man er så heldig å ha tilgang til et testsett vil man også kunne forvente at forklart $y$-varians vil ha et maksimum, som gjør det enklere å velge antall PC-er.
 
 Gitt PCA sin evne til å redusere dimensjonaliteten til et datasett, kan man være fristet til å tro at PCR på en eller annen måte reduserer dimensjonaliteten til forklaringsmodellen vår. Dette er ikke tilfellet, siden hver PC er avhengig av alle variablene i vår opprinnelige modell. Heldigvis finnes det en metode for dette også.
 
@@ -42,4 +42,4 @@ og en metode som enda hardere driver små $\theta_i$ til å bli eksakt 0, \textb
 For oss som virkelig er svake for modellskralhet finnes også \textbf{$\mathbf{L_0}$-regularisering}, der $R(f) = \textrm{antall ikke-null koeffisienter i } f$.
 
 \subsubsection{Gauss-Markovs teorem}
-Nå har vi gått gjennom mange former for multippel lineær regresjon, men hvilken er egentlig best? Det kommer jo an på mange ting, både datasett, faktisk modellstruktur, og mange andre ting. Men én ting kan vi si sikkert. Det er at om vi antar at $\mathbb{E}[e] = 0$, at $e$ er homoskedastisk ($\textrm{var}(e) = \sigma^2$ konstant og lik for alle $e_i$), og at $e$ for alle observasjoner er ukorrelerte ($\textrm{cov}(e_i, e_j) = 0$), så er $\hat{\theta}_\textrm{OLS}$ den beste lineære forventingsrette estimatoren (BLUE) av $\theta$. Dette er Gauss-Markovs teorem.
+Nå har vi gått gjennom mange former for multippel lineær regresjon, men hvilken er egentlig best? Det kommer jo an på mange ting, både datasett, faktisk modellstruktur, og mange andre ting. Men én ting kan vi si sikkert. Det er at om vi antar at $\mathbb{E}[e] = 0$, at $e$ er homoskedastisk ($\textrm{var}(e) = \sigma^2$ konstant og lik for alle $e_i$), og at $e$ for alle observasjoner er ukorrelerte ($\textrm{cov}(e_i, e_j) = 0$), så er $\hat{\theta}_\textrm{OLS}$ den beste lineære forventingsrette estimatoren (BLUE) av $\theta$. Dette er Gauss-Markovs teorem, og jeg kommer aldri til å nevne dette igjen.

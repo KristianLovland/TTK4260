@@ -38,25 +38,36 @@
 
 \newpage
 \section{Introduksjon}
-Dette dokumentet er et forsøk på å skaffe meg en strukturert oversikt over et middels strukturert fag. Ting er først og fremst hentet fra slides, men også noe fra lærebøker jeg kanskje legger til som kilder senere.
+Dette dokumentet er et forsøk på å skaffe meg en strukturert oversikt over emnet TTK4260 Innføring i Multivariat Datamodellering. Ting er først og fremst hentet fra slides, men også noe fra lærebøker jeg kanskje legger til som kilder senere.
 
 \newpage
 \section{Grunnleggende statistikk}
-Til grunn for alle multivariate metoder som kommer senere, ligger den grunnleggende statistikken som forhåpentligvis er kjent fra før. Den oppsummeres her i korte trekk.
+Før vi tar fatt på multivariat dataanalyse er det greit å gå gjennom noen viktige temaer fra univariat dataanalyse. Generelt for alt jeg skriver i disse notatene er at vi ikke bryr oss noe særlig om hva slags sannsynlighetsfordelinger variabler har (dvs. at vi stort sett antar at ting er normalfordelt). Vi er mest interessert i å, gitt inputdata $u$ og outputdata $y$, finne en modell
 
-\input{delkapitler/smating}
+\begin{equation}
+	y = f(u; \theta)
+\end{equation}
+der $\theta$ er parametre, som forklarer dataen vår på en god måte. I tillegg kommer det et par halvrelaterte temaer og noen digresjoner.
+
+% \input{delkapitler/smating}
 \input{delkapitler/minste-kvadrater}
 \input{delkapitler/maksimal-sannsynlighet}
 \input{delkapitler/maksimal-a-posteriori}
 \input{delkapitler/statistiske-ytelsesindekser}
 \include{delkapitler/bias-vs-varians}
+
+\section{Multivariat Dataanalyse}
+Dette kapitlet utgjør mesteparten av pensum i emnet. Jeg skal prøve å gå gjennom det nogenlunde systematisk.
 \include{delkapitler/eksperimentdesign}
 \include{delkapitler/pca}
 \include{delkapitler/ica}
-\include{delkapitler/modellseleksjon}
 \include{delkapitler/mlr}
 \include{delkapitler/pls}
+\include{delkapitler/modellseleksjon}
 \include{delkapitler/utliggerdeteksjon}
+
+\section{Andre temaer}
+Her kommer noen temaer som ikke er en del av det mer standard pensumet om multivariat statistikk, men likevel er en del av emnet.
 \include{delkapitler/tidsserier}
 \include{delkapitler/nevrale-nettverk}
 

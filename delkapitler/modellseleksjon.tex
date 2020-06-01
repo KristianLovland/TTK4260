@@ -37,19 +37,12 @@ Et spesialtilfelle av modellordenseleksjon er valg av antall PCA-komponenter å 
 	\item La summen av PC-ene forklare 95\% av variansen (ikke anbefalt)
 	\item Bruk et SCREE-plot til å tolke viktigheten av komponentene
 \end{itemize}
-I kombinasjon med sistnevnte kan kjennskap til systemet og dens dimensjonalitet være nyttig å bruke. Dette gjelder også når man skal gjøre kryssvalidring av PCA-modeller. I tillegg er det viktig å sjekke stabiliteten (dvs. sensitivitet til variasjoner i treninsdata). Om dette er uklart burde følgende figur forklare alt
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{figurer/pca_kryssvalidering}
-	\caption{Selvforklarende figur}
-	\label{fig:pca_kryssvalidering}
-\end{figure}
+I kombinasjon med sistnevnte kan kjennskap til systemet og dens dimensjonalitet være nyttig å bruke. Dette gjelder også når man skal gjøre kryssvalidring av PCA-modeller. I tillegg er det viktig å sjekke stabiliteten (dvs. sensitivitet til variasjoner i treningsdata). 
 
 \subsubsection{Informasjonskriterier}
 Om man har begrenset med regnekapasitet eller små datasett med dårlige muligheter for oppdeling, kan kryssvalidering være upraktisk å gjennomføre. Da kan at alternativ være å bruke et \textbf{informasjonskriterie}. Disse gir oss estimatorer for MSE som kompenserer for det faktum at MSE på treningssett typisk er underestimater.
 
-Anta at vi for en modell av orden $n$, basert på et datasett $\mathcal(D)$, har gitt et estimat $\theta_n$. Observasjonen estimatet vårt er basert på er fordelt med sannsynlighetstettheten $p_n(\mathcal{D}, \theta_n)$. Vi ønsker å minimere avstanden (hva nå enn det måtte bety) til den faktiske fordelingen $p_0(\mathcal{D}, \theta_0)$. En naturlig måte å måle denne avstanden på er ved å bruke Kullback-Leibler-divergens, som måler informasjon tapt når man representerer $p_0$ ved $p_n$. Denne er gitt av
+Anta at vi for en modell av orden $n$, basert på et datasett $\mathcal(D)$, har gitt et estimat $\theta_n$. Observasjonen estimatet vårt er basert på er fordelt med sannsynlighetstettheten $p_n(\mathcal{D}, \theta_n)$. Vi ønsker å minimere avstanden (hva nå enn det måtte bety) til den faktiske fordelingen $p_0(\mathcal{D}, \theta_0)$. En naturlig måte å måle denne avstanden på er ved å bruke Kullback-Leibler-divergens, som tidligere nevnt. Denne er gitt av
 
 \begin{equation}
 	K L\left(p_{0}, p_{n}\right):=\int \log \left(\frac{p_{0}\left({\mathcal{D}}, \theta_{0}\right)}{p_{n}\left({\mathcal{D}}, \theta_{n}\right)}\right) p_{0}\left({\mathcal{D}}, \theta_{0}\right) d {\mathcal{D}}

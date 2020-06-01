@@ -1,4 +1,6 @@
 \subsection{Tidsserier}
+Dette kapitlet er høyst relevant for alle som interesserer seg for dynamiske systemer.
+
 \subsubsection{Modellstruktur}
 Å jobbe med kontinuerlige systemer av ulineære differensiallikninger
 
@@ -41,8 +43,6 @@ der
 	A(q)=1+a_{1} q^{-1}+\ldots+a_{n_{a}} q^{-n_{a}}
 \end{equation}
 
-og
-
 \begin{equation}
 	B(q)=b_{1} q^{-1}+\ldots+b_{n_{b}} q^{-n_{b}}
 \end{equation}
@@ -66,10 +66,10 @@ Disse modellene har noen restriksjoner, f.eks. at både $u$ og $e$ har samme nev
 \begin{equation}
 	y(t)=\frac{B(q)}{F(q)} u(t)+\frac{C(q)}{D(q)} e(t)
 \end{equation}
-om man setter $C(q) = D(q)$ for man en \textbf{Output Error}-modell. Det kan imidlertid være problematisk med så generelle modeller. Kanskje kommer jeg tilbake til det.
+om man setter $C(q) = D(q)$ for man en \textbf{Output Error}-modell. Det kan imidlertid være problematisk med så generelle modeller, så det er verdt å gjøre en vurdering av hvor komplisert modellstruktur man egentlig har behov for. 
 
 \subsubsection{Ettstegsprediktorer}
-Heretter vil vi anta at vi har valgt en modellstruktur, og jobber med et system på formen
+Heretter vil vi anta at vi har gjort et valg av modellstruktur, og jobber med et system på formen
 
 \begin{equation}
 	y(t) = G(q) u(t) + H(q) e(t)
@@ -98,7 +98,7 @@ altså er det av interesse å finne $H^{-1}(q)$. Ved hjelp av litt utregning kan
 	\label{eq:predictor}
 \end{equation}
 
-Merk at siden vi antar $H(q)$ monisk, så inneholder leddet $1 - H^{-1}(q)]$ ingen konstantledd, så prediktoren er ikke avhenig av kjennskap til $y(t)$. Vi har antatt $H(q)$ minimum fase, så impulsresponsen dens eksisterer og gir oss en veldefinert prediksjon. Nærmere bestemt er
+Merk at siden vi antar $H(q)$ monisk, så inneholder leddet $[1 - H^{-1}(q)]$ ingen konstantledd, så prediktoren er ikke avhenig av kjennskap til $y(t)$. Vi har antatt $H(q)$ minimum fase, så impulsresponsen dens eksisterer og gir oss en veldefinert prediksjon. Nærmere bestemt er
 
 \begin{equation}
 	\left[H^{-1}(q) G(q)\right] u(t)=\left[\sum_{k=1}^{+\infty} \ell(k) q^{-k}\right] u(t)
@@ -122,11 +122,10 @@ Nå står vi bare igjen med et lite spørsmål: Hvordan finner vi $H^{-1}(q)$ og
 \end{equation}
 og velger modellstruktur basert på et eller annet kriterie (AIC, BIC, eller noe annet). Ved å sette inn verdiene for $H(q)$ og $G(q)$ gitt i avsnittet om modellstrukturer i likning \ref{eq:predictor}.
 
-Merk at det finnes massevis av praktiske hensyn som burde tas, som ikke er nevnt her. Et av de viktigste er persistent eksitasjon, som handler om hvor mye informasjon den gitte inputen gir om systemets dynamikk. For eksempel vil ikke et pådrag $u(t) = 0$ gi særlig mye informasjon om $G(q)$. Om $G(q)$ er komplisert vil $u(t)$ typisk måtte være mer komplisert for å få vite dette. Et typisk krav for mange parameterestimeringsmetoder er at $u(t)$ må oppfylle at det eksisterer konstanter $\alpha_0, \alpha_1, T_0 > 0$ slik at 
+Merk at det finnes massevis av praktiske hensyn som burde tas, som ikke er nevnt her. Et av de viktigste er persistent eksitasjon, som handler om hvor mye informasjon den gitte inputen gir om systemets dynamikk. For eksempel vil ikke et pådrag $u(t) = 0$ gi særlig mye informasjon om $G(q)$. Om $G(q)$ er komplisert vil $u(t)$ typisk også måtte være nokså komplisert for å få vite alt man trenger om $G(q)$. Et typisk krav for mange parameterestimeringsmetoder er at $u(t)$ må oppfylle at det eksisterer konstanter $\alpha_0, \alpha_1, T_0 > 0$ slik at 
 
 \begin{equation}
 	\alpha_0 I \leq \frac{1}{T_0} \int_t^{t + T_0} u(\tau) u(\tau)^T d\tau \leq \alpha_1 I \quad \textrm{for alle } t \leq 0
 \end{equation}
-
 $u(t)$ kalles da persistent eksiterende.
 

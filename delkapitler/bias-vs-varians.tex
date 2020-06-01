@@ -1,10 +1,10 @@
 \subsection{Bias vs. varians}
-Dette er en avveining man ikke slipper unna når men bedriver estimering. La oss bruke MSE for å illustrere dette. La 
+Dette er en avveining man ikke slipper unna når man bedriver estimering. La oss bruke MSE for å illustrere dette. Anta at vi estimerer en parameter $\theta$ med $\hat{\theta}$. La 
 
 \begin{equation}
 \begin{array}{l}{\mathcal{V}:=\widehat{\theta}-\mathbb{E}[\widehat{\theta}]} \\ {\mathcal{B}:=\mathbb{E}[\widehat{\theta}]-\theta}\end{array}
 \end{equation}
-
+Da er
 \begin{align}
 \mathbb{E}\left[\|\hat{\theta}-\theta\|^{2}\right] &=\mathbb{E}\left[\|\widehat{\theta}-\mathbb{E}[\widehat{\theta}]+\mathbb{E}[\widehat{\theta}]-\theta\|^{2}\right] \\ \nonumber
 &=\mathbb{E}\left[\|\mathcal{V}+\mathcal{B}\|^{2}\right]\\ \nonumber
@@ -12,12 +12,8 @@ Dette er en avveining man ikke slipper unna når men bedriver estimering. La oss
 &=\mathbb{E}\left[\|\mathcal{V}\|^{2}+\|\mathcal{B}\|^{2}+2 \mathcal{V}^{T} \mathcal{B}\right] \\ \nonumber
 &=\mathbb{E}\left[\|\mathcal{V}\|^{2}\right]+\|\mathcal{B}\|^{2}
 \end{align}
+Dvs. at en estimator sin forventede feil vil bestå både av et bias-ledd (systematisk feil) og et varians-ledd. For å oppnå et godt estimat må begge disse minimeres, men å minimere bias og varians er typisk motstridende interesser, og man må gjøre vurderinger av datasett og estimeringsmetodikk for å finne en god avveining.
 
 Denne avveiningen henger sammen med hvor komplisert man gjør forklaringsmodellen $f(u_t; \theta)$. Om man gjør den veldig komplisert vil man kunne følge dataen nøyaktig, men man vil være utsatt for at dette ikke lar seg generalisere til andre datasett \textbf{overfitting}. Dette svarer til lav bias, men stor varians. Om modellen er for enkel vil man få en enkel modell som generaliserer, men man vil også kunne unngå å beskrive viktig struktur i dataen. Dette er \textbf{underfitting}, og svarer til liten varians, men stor bias.
 
-Det finnes flere metoder som forsøker å gjøre denne avveiningen. Noen av dem er
-\begin{itemize}
-\item Akaikes informasjonskriterium
-\item Det Bayesiske informasjonskriteriumet
-\item Minimum lengde-beskrivelse
-\end{itemize}
+Det finnes verktøy som kan brukes som hjelp til å ta beslutninger om slike ting, som vi kommer tilbake til senere.

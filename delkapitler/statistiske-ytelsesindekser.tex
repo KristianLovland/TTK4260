@@ -1,33 +1,23 @@
 \subsection{Statistiske ytelsesindekser}
-Det nevnes tre bruksområder for indekser som måler statistisk ytelse
-\begin{itemize}
-\item Regresjonsproblemer
-\item Klassifiseringsproblemer
-\item Sammenligning av sannsynlighetsfordelinger
-\end{itemize}
-Vi går gjennom disse i den rekkefølgen.
+Vi går kort gjennom noen statistiske ytelsesindekser (dvs. for ytelsen til en estimator) for tre ulike typer problemstilling.
 
 \subsubsection{Regresjonsproblemer}
-En naturlig indeks er \textbf{Mean Squared Error (MSE)}
+En mye brukt indeks er \textbf{Mean Squared Error (MSE)}
 \begin{equation}
 \textrm{MSE} = \mathbb{E}\left[\|\theta-\widehat{\theta}\|^{2}\right]
 \end{equation}
-
 Av denne følger \textbf{Root Mean Square Error}
 \begin{equation}
 \textrm{RMSE} = \sqrt{\mathbb{E}\left[\|\theta-\widehat{\theta}\|^{2}\right]}
 \end{equation}
-
 Det er viktig å merke seg at siden MSE er en funksjon av $\theta$, så kan den ikke regnes ut. Hvorfor bryr vi oss om den da? Tja, den kan i hvert fall inspirere lignende indekser. \textbf{Residual Sum of Squares (RSS)} baserer seg på residualene til estimatene
 \begin{equation}
 \operatorname{RSS}(\widehat{\theta}):=\sum_{i}\left(y_{i}-\widehat{y}_{i}(\widehat{\theta})\right)^{2}
 \end{equation}
-
 Det finnes imidlertid problemer med alle disse. Først og fremst er det et problem at de er avhengig av mengden av og størrelsen på dataen man vurderer estimatene av. Man vektlegger å unngå avvik i estimatene fra store målinger mer enn små. En metode som fungerer noe bedre, uten å bruke normalisering, er å bruke 1-normen i stedet for kvadratet. Dette gjøres i \textbf{Mean Absolute Deviaton (MAD)}
 \begin{equation}
 \mathrm{MAD}:=\mathbb{E}[|y-\widehat{y}|]
 \end{equation}
-
 En metode som bruker en form for normalisering er \textbf{Fraction of Variance Unexplained (FVU)}
 \begin{equation}
 \mathrm{FVU}(\widehat{\theta}):=\frac{\operatorname{RSS}(\widehat{\theta})}{\operatorname{var}(y)}=\frac{\sum_{i}\left(y_{i}-\widehat{y}_{i}(\widehat{\theta})\right)^{2}}{\sum_{i}\left(y_{i}-\frac{1}{N} \sum_{i} y_{i}\right)^{2}}
@@ -36,16 +26,8 @@ Denne må tolkes med måte, siden hva som er en god forklaringgrad er veldig avh
 Denne tolkes som "andel av variansen i avhengig variable som er predikerbar fra de uavhengige variablene".
 
 \subsubsection{Klassifiseringsproblemer}
-Vi diskuterer her klassifisering i form av "ja/nei". Da kan man gjøre to typer feil: Falsk positiv (\textbf{Type 1}) og falsk negativ (\textbf{Type 2}). Figur \ref{fig:klassifisering} viser definisjonen på en del uttrykk som beskriver egenskapene til en klassifikator.
+Vi diskuterer her klassifisering i form av "ja/nei". Da kan man gjøre to typer feil: Falsk positiv (\textbf{Type 1}) og falsk negativ (\textbf{Type 2}). Det finnes mange mer eller mindre naturlige måter å vurdere om en estimator sine ja/nei-svar er gode på:
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{Figurer/klassifisering.png}
-\caption{Egenskaper til klassifikator}
-\label{fig:klassifisering}
-\end{figure}
-
-Muntlig kan disse forklares som
 \begin{itemize}
 \item \textbf{Prevalens} -- Hvor ofte opptrer ja-tilfellet i datasettet vårt?
 \item \textbf{Nøyaktighet} -- Hvor ofte har klassifikatoren rett?
@@ -63,10 +45,9 @@ sensitivitet}}{\textrm{presisjon} + \textrm{
 sensitivitet}}
 \end{equation}
 
-Om man vil finne ut hvor ulike to klassifikatorer er, kan man bruke \textbf{Kappa-koeffisient}. Dette forklares ikke mer, men det eksisterer.
-
 \subsubsection{Sammenligning av sannsynlighetsfordelinger}
-Her kan man bruke \textbf{Kullback-Leibler-divergens}. Denne er gitt av \begin{equation}
+I utledning av ulike former for estimatorer eller ytelsesindekser ønsker man gjerne å basere seg på statistisk teori enn å bruke ``sunn fornuft''. Et mye brukt mål på likheten mellom to sannsynlighetsfordelinger er \textbf{Kullback-Leibler-divergens}. Denne er utledet med utgangspunkt i informasjonsteori. Gitt sannsynlighetsfordelinger $p_0$ og $p_n$ og data $\mathcal{D}$, forteller KL-divergensen hvor mye informasjon som tapes på å representere $p_0$ med $p_n$ (dette er ikke symmetrisk), og kan dermed brukes som mål på hvor ``forskjellige'' fordelingene er. Den er gitt av
+\begin{equation}
 		K L\left(p_{0}, p_{n}\right):=\int \log \left(\frac{p_{0}\left({\mathcal{D}}, \theta_{0}\right)}{p_{n}\left({\mathcal{D}}, \theta_{n}\right)}\right) p_{0}\left({\mathcal{D}}, \theta_{0}\right) d {\mathcal{D}}
 \end{equation}
-og beskriver informasjonen tapt (oppgitt i bits om man bruker 2 som grunntall i logaritmen) ved å representere $p_0$ med $P_n$ (tror jeg, potensielt kan det være omvendt). Mer uformelt kan verdien, som nevnt, brukes til å kvantifisere hvor ``forskjellig'' to sannsynlighetsfordelinger er.
+

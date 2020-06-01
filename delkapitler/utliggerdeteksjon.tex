@@ -1,11 +1,11 @@
 \subsection{Utliggerdeteksjon}
-Om et måleinstrument er upresist kan vi anta at målesignalene er utsatt for Gaussisk støy, og likevel få nyttig informasjon fra hver observasjon $y_i = f(x_i) + \varepsilon_i$. Det er imidlertid ikke alle feil som er så hyggelige. En feil inntasting av data er vanskelig å modellere som noe annet enn feil som ideelt sett burde fjernes, og korrekte målinger av ekstreme tilfeller kan gjøre mer skade enn nytte når man vil ha en modell som stort sett fungerer. Disse to tilfellene ville antagelig hatt hhv. høy \textit{residual} og \textit{leverage}, vist i figur \ref{fig:utliggere}.
+Om et måleinstrument er upresist kan vi anta at målesignalene er utsatt for Gaussisk støy, og likevel få nyttig informasjon fra hver observasjon $y_i = f(x_i) + \varepsilon_i$. Det er imidlertid ikke alle feil som er fullt så hyggelige. En feil inntasting av data er vanskelig å modellere som noe annet enn feil som ideelt sett burde fjernes, og korrekte målinger av ekstreme tilfeller kan gjøre mer skade enn nytte når man vil ha en modell som stort sett fungerer. Disse to tilfellene ville antagelig hatt hhv. høy \textit{residual} og \textit{leverage}, vist i figur \ref{fig:utliggere}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{figurer/utligger_illustrasjon.png}
 	\caption{Ulike typer utliggere}
-	\label{fig:fig:utliggere}
+	\label{fig:utliggere}
 \end{figure}
 
 La $T$ være en matrise med scores slik at $X \approx T P^T$. Et mål på ``utliggerhet'' er bør da si noe om avstand til ``resten av dataen''. Noen slike verdier følger.
@@ -18,7 +18,7 @@ La $T$ være en matrise med scores slik at $X \approx T P^T$. Et mål på ``utli
 	\label{eq:hotelling_T2}
 \end{equation}
 
-$T^2$ er F-fordelt, og kan dermed brukes til å finne ut om $y_n$ kommer fra samme populasjon som resten av observasjonene (vha. signifikans). En typisk måte å visualisere dette på er som en ellipse i et score-plott. Hvilket signifikansnivå denne ellipsen burde svare til varierer mellom fagområder.
+$T^2$ er F-fordelt, og kan dermed brukes til å finne ut om $y_n$ kommer fra samme populasjon som resten av observasjonene (med et eller annet signifikansnivå). En typisk måte å visualisere dette på er som en ellipse i et score-plott. 
 
 \subsubsection{Leverage}
 For observasjonen $y_n$ er \textbf{leverage} gitt av
@@ -26,7 +26,7 @@ For observasjonen $y_n$ er \textbf{leverage} gitt av
 \begin{equation}
 	h_n = \frac{1}{N} + t_{n, 1:A} (T_{1:A}^T T)^{-1} t_{n, 1:A}^T
 \end{equation}
-For leverage brukes vanligvis ikke signifikans for å bestemme kritism grense (dvs. hva som defineres som en utligger), men heller en definisjon som er ganske så ad-hoc: $h_{\textrm{kritisk}} = \frac{3(A+1)}{N}$.
+For leverage brukes vanligvis ikke signifikans for å bestemme kritisk grense (dvs. hva som defineres som en utligger), men heller en definisjon som er ganske så ad-hoc: $h_{\textrm{kritisk}} = \frac{3(A+1)}{N}$.
 
 Summen av $h_n$ over alle $n$ observasjoner er 1, så leverage kan sees på som andelen varians en observasjon bidrar med. Denne verdien er lineært avhengig av Hotellings $T^2$ gjennom formelen
 
@@ -34,7 +34,7 @@ Summen av $h_n$ over alle $n$ observasjoner er 1, så leverage kan sees på som 
 	T^2 = (N-1) (h - \frac{1}{N})
 \end{equation}
 
-\subsubsection{Residualer}
+\subsubsection{F- og Q-Residualer}
 Som tidligere beskrevet er residualene for en modell $T P^T$ tilpasser $X$ gitt av
 
 \begin{equation}
@@ -66,6 +66,8 @@ F-residualen kan finnes vha. Q-residualen, og regnes som mer konservativ. Den er
 	F_{i, A} = \frac{Q_i}{K}
 \end{equation}
 Når man kjenner denne kan man gjennomføre en vanlig F-test.
+
+Om man ikke vil bruke formler og finne disse verdiene manuelt, kan man bruke de innebygde metodene for dette som antageligvis allerede eksisterer i \texttt{verkøytet} man bruker for dataanalyse.
 
 \subsubsection{Plott}
 Det finnes mange nyttige plott man kan bruke når man vil oppdage utliggere, typisk i form av scatterplot med grensene diskutert i dette avsnittet plottet som linjer eller kurver. Kan hende kommer det noen figurer her etter hvert, eller kanskje et lite eksempel.
