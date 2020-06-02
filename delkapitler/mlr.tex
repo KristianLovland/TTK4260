@@ -31,15 +31,17 @@ I vanlig, lineær regresjon vil man i de fleste tilfeller ende opp med modeller 
 
 der $\lambda$ er en tuningparameter. Valget av denne er viktig, og man tester gjerne ut mange ulike, og velger den endelige verdien vha. f.eks. kryssvalidering eller en annen form for modellseleksjon.
 
-Det finnes mange typer regularisering. For $f(x)$ lineær er to vanlige valg \textbf{Tikhonov-regularisering/Ridge-regresjon}, hvor 
+Det finnes mange typer regularisering. For $f(x)$ lineær er to vanlige valg \textbf{Tikhonov-regularisering/Ridge-regresjon} (ev. $L_2$-regularisering), hvor 
 \begin{equation}
 	R(f(x)) = R(\theta_1 x_1 + \cdots + \theta_n x_n) = \sum_{i = 1}^n \theta_i^2
 \end{equation}
-og en metode som enda hardere driver små $\theta_i$ til å bli eksakt 0, \textbf{LASSO}, der
+og en metode som enda hardere driver små $\theta_i$ til å bli eksakt 0, \textbf{LASSO} (ev. $L_1$-regularisering), der
 \begin{equation}
 	R(f(x)) = R(\theta_1 x_1 + \cdots + \theta_n x_n) = \sum_{i = 1}^n | \theta_i |
 \end{equation}
 For oss som virkelig er svake for modellskralhet finnes også \textbf{$\mathbf{L_0}$-regularisering}, der $R(f) = \textrm{antall ikke-null koeffisienter i } f$.
+
+Som en fun fact kan det nevnes at både $L_2$- og $L_1$-regularisering kan utledes fra Bayesisk statistikk. Om man antar at feilen i $\theta$ er normalfordelt får man en posterior fordeling med mode lik $L_2$-estimatet, mens om man antar en Laplacefordeling vil moden være lik $L_1$-estimatet.
 
 \subsubsection{Gauss-Markovs teorem}
 Nå har vi gått gjennom mange former for multippel lineær regresjon, men hvilken er egentlig best? Det kommer jo an på mange ting, både datasett, faktisk modellstruktur, og mange andre ting. Men én ting kan vi si sikkert. Det er at om vi antar at $\mathbb{E}[e] = 0$, at $e$ er homoskedastisk ($\textrm{var}(e) = \sigma^2$ konstant og lik for alle $e_i$), og at $e$ for alle observasjoner er ukorrelerte ($\textrm{cov}(e_i, e_j) = 0$), så er $\hat{\theta}_\textrm{OLS}$ den beste lineære forventingsrette estimatoren (BLUE) av $\theta$. Dette er Gauss-Markovs teorem, og jeg kommer aldri til å nevne dette igjen.

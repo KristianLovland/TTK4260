@@ -10,6 +10,7 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{tikz}
+\usepackage{biblatex}
 
 % Redefinér til norsk tittel på figur og innholdfortegnelse, og algoritmekodeord
 \renewcommand{\figurename}{Fig.}
@@ -22,6 +23,9 @@
 \makeatletter
 \renewcommand{\ALG@name}{Algoritme}
 \makeatother
+
+\addbibresource{kilder.bib}
+
 
 % Endre font
 % \usepackage[adobe-utopia]{mathptmx}
@@ -38,7 +42,7 @@
 
 \newpage
 \section{Introduksjon}
-Dette dokumentet er et forsøk på å skaffe meg en strukturert oversikt over emnet TTK4260 Innføring i Multivariat Datamodellering. Ting er først og fremst hentet fra slides, men også noe fra lærebøker jeg kanskje legger til som kilder senere.
+Dette dokumentet er et forsøk på å skaffe meg en strukturert oversikt over emnet TTK4260 Innføring i Multivariat Datamodellering. Ting er først og fremst hentet fra slides, men også noe fra \cite{James2013} og \cite{Esbensen2018}.
 
 \newpage
 \section{Grunnleggende statistikk}
@@ -73,5 +77,8 @@ Dette kapitlet utgjør mesteparten av pensum i emnet. Jeg skal prøve å gå gje
 Her kommer noen temaer som ikke er en del av det mer standard pensumet om multivariat statistikk, men likevel er en del av emnet.
 \input{delkapitler/tidsserier}
 \input{delkapitler/nevrale-nettverk}
+
+\newpage
+\printbibliography
 
 \end{document}

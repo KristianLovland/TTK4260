@@ -1,0 +1,111 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Esbensen2018}{book}{}
+      \name{author}{3}{}{%
+        {{hash=a9cc618f795763ca9bcbf8e6fd4af58b}{%
+           family={Esbensen},
+           familyi={E\bibinitperiod},
+           given={Kim\bibnamedelima H.},
+           giveni={K\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=aed2ffa352c8a915f85636811bc5a9fa}{%
+           family={Swarbrick},
+           familyi={S\bibinitperiod},
+           given={Brad},
+           giveni={B\bibinitperiod}}}%
+        {{hash=f84669c8e92aefa6fc8a3c7b47f1e83f}{%
+           family={Westad},
+           familyi={W\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {CAMO Software AS}%
+      }
+      \strng{namehash}{dae5f065f22c329dcae488403e6cfc0b}
+      \strng{fullhash}{dae5f065f22c329dcae488403e6cfc0b}
+      \strng{bibnamehash}{dae5f065f22c329dcae488403e6cfc0b}
+      \strng{authorbibnamehash}{dae5f065f22c329dcae488403e6cfc0b}
+      \strng{authornamehash}{dae5f065f22c329dcae488403e6cfc0b}
+      \strng{authorfullhash}{dae5f065f22c329dcae488403e6cfc0b}
+      \field{sortinit}{E}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Multivariate Data Analysis - An Introduction to Multivariate Analysis}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://www.amazon.co.uk/Multivariate-Data-Analysis-introduction-Analytical/dp/826911040X
+      \endverb
+      \verb{url}
+      \verb https://www.amazon.co.uk/Multivariate-Data-Analysis-introduction-Analytical/dp/826911040X
+      \endverb
+    \endentry
+    \entry{James2013}{book}{}
+      \name{author}{4}{}{%
+        {{hash=df184c5fa522ac8a515ec4de13aef234}{%
+           family={James},
+           familyi={J\bibinitperiod},
+           given={Gareth},
+           giveni={G\bibinitperiod}}}%
+        {{hash=1ab16961e0de50711fa6bd9425f9b4a6}{%
+           family={Witten},
+           familyi={W\bibinitperiod},
+           given={Daniela},
+           giveni={D\bibinitperiod}}}%
+        {{hash=0cb8fe4210baa81c4b0e67913b4d2768}{%
+           family={Hastie},
+           familyi={H\bibinitperiod},
+           given={Trevor},
+           giveni={T\bibinitperiod}}}%
+        {{hash=88eea600247d798f8b2ce0b2dc614492}{%
+           family={Tibshirani},
+           familyi={T\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{f8f737f83d9e451c1afaa13cdc120516}
+      \strng{fullhash}{da61646157a6be769f34984f5cb603b0}
+      \strng{bibnamehash}{f8f737f83d9e451c1afaa13cdc120516}
+      \strng{authorbibnamehash}{f8f737f83d9e451c1afaa13cdc120516}
+      \strng{authornamehash}{f8f737f83d9e451c1afaa13cdc120516}
+      \strng{authorfullhash}{da61646157a6be769f34984f5cb603b0}
+      \field{sortinit}{J}
+      \field{sortinithash}{fce5f8d0bd05e8d93f3dbe21c78897ca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{An Introduction to Statistical Learning: with Applications in R}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://faculty.marshall.usc.edu/gareth-james/ISL/
+      \endverb
+      \verb{url}
+      \verb https://faculty.marshall.usc.edu/gareth-james/ISL/
+      \endverb
+      \keyw{general_machine_learning}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
