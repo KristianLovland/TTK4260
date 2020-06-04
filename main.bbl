@@ -19,6 +19,44 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{Chen2013}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bee525970e44a21e58f0d09911622f85}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Lennart\bibnamedelimb Ljung\bibnamedelima Tianshi},
+           giveni={L\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{bee525970e44a21e58f0d09911622f85}
+      \strng{fullhash}{bee525970e44a21e58f0d09911622f85}
+      \strng{bibnamehash}{bee525970e44a21e58f0d09911622f85}
+      \strng{authorbibnamehash}{bee525970e44a21e58f0d09911622f85}
+      \strng{authornamehash}{bee525970e44a21e58f0d09911622f85}
+      \strng{authorfullhash}{bee525970e44a21e58f0d09911622f85}
+      \field{sortinit}{C}
+      \field{sortinithash}{963e9d84a3da2344e8833203de5aed05}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Estimation of unknown dynamics is what system identification is about and a core problem in adaptive control and adaptive signal processing. It has long been known that regularization can be quite beneficial for general inverse problems of which system identification is an example. But only recently, partly under the influence of machine learning, the use of well tuned regularization for estimating linear dynamical systems has been investigated more seriously. In this presentation we review these new results and discuss what they may mean for the theory and practice of dynamical model estimation in general.}
+      \field{issn}{1474-6670}
+      \field{journaltitle}{IFAC Proceedings Volumes}
+      \field{note}{11th IFAC Workshop on Adaptation and Learning in Control and Signal Processing}
+      \field{number}{11}
+      \field{title}{What can regularization offer for estimation of dynamical systems?}
+      \field{volume}{46}
+      \field{year}{2013}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
+      \verb{doi}
+      \verb https://doi.org/10.3182/20130703-3-FR-4038.00155
+      \endverb
+      \verb{urlraw}
+      \verb http://www.sciencedirect.com/science/article/pii/S1474667016329135
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S1474667016329135
+      \endverb
+    \endentry
     \entry{Esbensen2018}{book}{}
       \name{author}{3}{}{%
         {{hash=a9cc618f795763ca9bcbf8e6fd4af58b}{%

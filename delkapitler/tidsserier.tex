@@ -119,9 +119,40 @@ Nå står vi bare igjen med et lite spørsmål: Hvordan finner vi $H^{-1}(q)$ og
 
 \begin{equation}
 	\theta_{j}^{*}=\underset{\theta_{j} \in \Theta_{j}}{\min } \sum_{t} \ell\left(-H^{-1}(q) G(q) u(t)+H^{-1}(q) y(t)\right)
+	\label{eq:sysid}
 \end{equation}
 og velger modellstruktur basert på et eller annet kriterie (AIC, BIC, eller noe annet). Ved å sette inn verdiene for $H(q)$ og $G(q)$ gitt i avsnittet om modellstrukturer i likning \ref{eq:predictor}.
 
+\subsubsection{Regularisering}
+Denne problemformuleringen antar ingenting om systemet som identifiseres, men i praksis har vi gjerne ganske mye kunnskap om hvordan systemet oppfører seg (i hvert fall på et veldig grunnleggende nivå). For eksempel vil de fleste systemer av interesse ha en impulsrespons (og dermed også koeffisienter) som avtar eksponensielt. Denne kunnskapen kan tvinges på modellen i form av regularisering, og gjøres kanskje enklest ved å omformulere likning \ref{eq:sysid} til å være på matriseform og legge til et kvadratisk straffeledd. Dette illustreres best med et eksempel, hentet ganske direkte fra \cite{Chen2013}.
+
+Se på en ARX-prosess
+
+\begin{equation}
+	y(t) = -a_1 y(t-1) - \cdots - a_n y(t-n) + b_1 u(t-1) + \cdots + b_m u(t-m)
+	\label{eq:ARX}
+\end{equation}
+Denne kan skrives mer kompakt (som man gjerne gjør det når man f.eks. bedriver adaptiv regulering)
+
+\begin{equation}
+	y(t) = \varphi_y ^T (t) \theta_a + \varphi_u ^T (t) \theta_b = \varphi ^T (t) \theta
+	\label{eq:ARX2}
+\end{equation}
+Vi er da interessert i å finne et estimat $\hat{\theta}$ som minimerer $\ell( y - \varphi ^T (t) \hat{\theta} )$. Regularisering introduseres da med en matrise $\Pi$, som har det navnet fordi den kan sees på som en Bayesisk prior til fordelingen til $\theta$ (som jeg så vidt nevnte i det forrige kapittelet om regularisering). En slik kovariansmatrise vil da typisk (for en ARX-modell) se ut som følger
+
+\begin{equation}
+	\Pi = \begin{bmatrix}
+		\Pi^a & 0 \\
+		0 & \Pi^b
+	\end{bmatrix}
+\end{equation}
+der elementene $\Pi^a_{i, j} = C \min(\lambda^j, \lambda^k)$ er bestemt av parameterne $C$ og $\lambda$, og inkorporer kunnskapen om at impulsresponsen til systemet avtar eksponensielt (det samme gjelder for $\Pi^b$, potensielt med andre parameterverdier). Det endelige regresjonsproblemet blir da
+
+\begin{equation}
+	\hat{\theta} = \textrm{argmin}_\theta \; \ell (y - \varphi ^T (t) \theta) + \theta^T \Pi \theta
+\end{equation}
+
+\subsubsection{Annet}
 Merk at det finnes massevis av praktiske hensyn som burde tas, som ikke er nevnt her. Et av de viktigste er persistent eksitasjon, som handler om hvor mye informasjon den gitte inputen gir om systemets dynamikk. For eksempel vil ikke et pådrag $u(t) = 0$ gi særlig mye informasjon om $G(q)$. Om $G(q)$ er komplisert vil $u(t)$ typisk også måtte være nokså komplisert for å få vite alt man trenger om $G(q)$. Et typisk krav for mange parameterestimeringsmetoder er at $u(t)$ må oppfylle at det eksisterer konstanter $\alpha_0, \alpha_1, T_0 > 0$ slik at 
 
 \begin{equation}
